@@ -1,9 +1,9 @@
 {
   "name": "earea-serverless",
   "version": "1.0.0",
+  "scripts": {
+    "deploy": "sls deploy"
+  },
   "dependencies": {},
-  "devDependencies": {
-    "serverless-plugin-typescript": "^2.1.1",
-    "typescript": "^4.6.2"
-  }
+  "devDependencies": {}
 }

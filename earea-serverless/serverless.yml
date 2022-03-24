@@ -6,9 +6,6 @@ provider:
   runtime: nodejs14.x
   region: eu-central-1
 
-plugins:
-  - serverless-plugin-typescript
-
 functions:
   hello:
     handler: handlers/hello.handler
