@@ -4,10 +4,14 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs14.x
+  region: eu-central-1
+
+plugins:
+  - serverless-plugin-typescript
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handlers/hello.handler
     events:
       - httpApi:
           path: /
