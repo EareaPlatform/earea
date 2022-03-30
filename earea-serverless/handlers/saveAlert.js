@@ -1,9 +1,12 @@
 exports.handler = async (event) => {
+
+  // execute some code with DB
+
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: "Go Serverless v3.0! Your function executed successfully!",
+        message: `Saving alert ${event.name} to DB: ${event.data}`,
         input: event,
       },
       null,

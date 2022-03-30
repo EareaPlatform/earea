@@ -7,9 +7,15 @@ provider:
   region: eu-central-1
 
 functions:
-  hello:
-    handler: handlers/hello.handler
+  processSound:
+    handler: handlers/processSound.handler
     events:
       - httpApi:
-          path: /
+          path: /process/sound
           method: get
+
+  saveAlert:
+    handler: handlers/saveAlert.handler
+
+  executeAlert:
+    handler: handlers/executeAlert.handler
