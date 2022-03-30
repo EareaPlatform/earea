@@ -1,0 +1,21 @@
+service: earea-serverless
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-central-1
+
+functions:
+  processSound:
+    handler: handlers/processSound.handler
+    events:
+      - httpApi:
+          path: /process/sound
+          method: get
+
+  saveAlert:
+    handler: handlers/saveAlert.handler
+
+  executeAlert:
+    handler: handlers/executeAlert.handler

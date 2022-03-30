@@ -1,0 +1,9 @@
+{
+  "name": "earea-serverless",
+  "version": "1.0.0",
+  "scripts": {
+    "deploy": "sls deploy"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
