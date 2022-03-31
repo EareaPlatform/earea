@@ -1,7 +1,7 @@
 const prefix = (name: string) => `com-earea-${name}`;
 
-export const screenIds: Record<string, string> = {
+export const screenIds = {
   mainScreen: prefix('main-screen'),
-  systemPreferences: prefix('system-preferences'),
+  settingsScreen: prefix('settings-preferences'),
   demoScreen: prefix('demo'),
 };
