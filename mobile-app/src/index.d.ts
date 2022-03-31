@@ -6,6 +6,7 @@ interface Sensor {
 }
 
 interface NotificationData {
+  id: string;
   fromSensorId: string;
   time: Date;
 }

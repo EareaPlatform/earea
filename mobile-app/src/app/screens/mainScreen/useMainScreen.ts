@@ -1,3 +1,8 @@
+import {useSensors} from '../../state/sensors/useSensors';
+import {useMemo} from 'react';
+import {useNotifications} from '../../state/notifications/useNotifications';
+import * as _ from 'lodash';
+
 export interface ItemToShow {
   key: string;
   title: string;
@@ -7,29 +12,34 @@ export interface ItemToShow {
 export interface UseMainScreen {
   notificationsToShow: ItemToShow[];
   sensorsToShow: ItemToShow[];
+  showNotifications: boolean;
+  showSensors: boolean;
 }
 
-const sensors: Sensor[] = [
-  {id: 'sensor-1', title: 'Audio 1', isOnline: false, lastActivity: new Date()},
-  {id: 'sensor-2', title: 'Audio 2', isOnline: true, lastActivity: new Date()},
-  {id: 'sensor-3', title: 'Vibration 1', isOnline: false, lastActivity: new Date()},
-];
-
 export const useMainScreen = (): UseMainScreen => {
-  const notificationsToShow: ItemToShow[] = [
-    {key: 'item-0', title: sensors[0].title, rightText: sensors[0].lastActivity.toLocaleTimeString()},
-    {key: 'item-1', title: sensors[2].title, rightText: sensors[2].lastActivity.toLocaleTimeString()},
-    {key: 'item-2', title: sensors[1].title, rightText: sensors[1].lastActivity.toLocaleTimeString()},
-  ];
+  const {sensors, loaded: showSensors} = useSensors();
+  const {notifications, loaded: showNotifications} = useNotifications();
 
-  const sensorsToShow: ItemToShow[] = [
-    {key: 'sensor-0', title: sensors[0].title, rightText: sensors[0].isOnline ? 'Online' : 'Offline'},
-    {key: 'sensor-1', title: sensors[2].title, rightText: sensors[2].isOnline ? 'Online' : 'Offline'},
-    {key: 'sensor-2', title: sensors[1].title, rightText: sensors[1].isOnline ? 'Online' : 'Offline'},
-  ];
+  const notificationsToShow: ItemToShow[] = useMemo(() => _.take(notifications, 5).map((notification: NotificationData) => {
+    const sensor = sensors.find((item: Sensor) => item.id === notification.fromSensorId);
+
+    return {
+      key: notification.id,
+      title: sensor ? sensor.title : '',
+      rightText: notification.time.toLocaleString(),
+    };
+  }), [sensors, notifications]);
+
+  const sensorsToShow: ItemToShow[] = useMemo(() => sensors.map((sensor: Sensor) => ({
+    key: sensor.id,
+    title: sensor.title,
+    rightText: sensor.isOnline ? 'Online' : 'Offline',
+  })), [sensors]);
 
   return {
     notificationsToShow,
     sensorsToShow,
+    showSensors,
+    showNotifications,
   };
 };
