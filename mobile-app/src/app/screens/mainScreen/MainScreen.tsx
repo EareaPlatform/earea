@@ -41,7 +41,11 @@ const MainScreen = React.memo(() => {
       >
         {notificationsToShow.map(renderItem)}
       </Section>
-      <Section headerTitle={strings.MAIN_SCREEN_SENSORS_TITLE} loading={!showSensors}>
+      <Section
+        headerTitle={strings.MAIN_SCREEN_SENSORS_TITLE}
+        loading={!showSensors}
+        rightButton={showSensors ? {label: 'View all'} : undefined}
+      >
         {sensorsToShow.map(renderItem)}
       </Section>
     </ScreenWrapper>

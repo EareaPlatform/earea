@@ -30,7 +30,7 @@ export const useMainScreen = (): UseMainScreen => {
     };
   }), [sensors, notifications]);
 
-  const sensorsToShow: ItemToShow[] = useMemo(() => sensors.map((sensor: Sensor) => ({
+  const sensorsToShow: ItemToShow[] = useMemo(() => _.take(sensors, 3).map((sensor: Sensor) => ({
     key: sensor.id,
     title: sensor.title,
     rightText: sensor.isOnline ? 'Online' : 'Offline',
