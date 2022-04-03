@@ -11,7 +11,7 @@ exports.handler = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: '',
+        message: 'Knock Knock Knock',
         input: event,
       },
       null,

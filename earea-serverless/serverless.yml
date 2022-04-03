@@ -19,3 +19,7 @@ functions:
 
   executeAlert:
     handler: handlers/executeAlert.handler
+    events:
+      - httpApi:
+          path: /executeAlert
+          method: post
