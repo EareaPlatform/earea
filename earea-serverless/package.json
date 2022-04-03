@@ -4,6 +4,8 @@
   "scripts": {
     "deploy": "sls deploy"
   },
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.1105.0"
+  },
   "devDependencies": {}
 }

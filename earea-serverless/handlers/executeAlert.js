@@ -2,6 +2,7 @@ exports.handler = async (event) => {
 
   // get flag of if allowed to alert
   const allowedToAlert = true;
+  console.log('executeAlert Event:', event);
 
   if (allowedToAlert) {
     // execute alert in arduino
@@ -11,7 +12,7 @@ exports.handler = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: '',
+        message: 'Knock Knock Knock',
         input: event,
       },
       null,
