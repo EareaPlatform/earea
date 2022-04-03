@@ -5,6 +5,7 @@ exports.handler = async (event, context) => {
   const shouldAlert = true; //event.data.reduce((previousSum, currentValue) => previousSum + currentValue, 0) > 20;
   let message = shouldAlert ? 'Execute alert' : 'Nothing happened';
 
+
   if (shouldAlert) {
     // call lambda: Save data
     // call lambda: Execute alert
@@ -16,6 +17,7 @@ exports.handler = async (event, context) => {
     }, function(err, data) {
       if(err) {
         console.error('error publishing to SNS');
+        message = 'error publishing to SNS: ${err]';
         context.fail(err);
       } else {
         console.info('message published to SNS');

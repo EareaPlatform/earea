@@ -1,8 +1,12 @@
-export const strings: Record<string, string> = {
-  TAB_MAIN_SCREEN_TITLE: 'Main',
-  TAB_SYSTEM_PREFERENCES_TITLE: 'System',
-  TAB_DEMO_TITLE: 'Demo',
-  MAIN_SCREEN_TEXT: 'Hello Earea',
-  SYSTEM_PREFERENCES_TEXT: 'System Preferences Screen',
+export const strings = {
+  TAB_MAIN_SCREEN_LABEL: 'Main',
+  TAB_SETTINGS_SCREEN_LABEL: 'Settings',
+  TAB_DEMO_LABEL: 'Demo',
+  MAIN_SCREEN_TITLE: 'Earea',
+  MAIN_SCREEN_NOTIFICATIONS_TITLE: 'Last notifications',
+  MAIN_SCREEN_SENSORS_TITLE: 'Sensors status',
+  SETTINGS_SCREEN_TITLE: 'Settings',
+  SETTINGS_SCREEN_NOTIFICATIONS_TITLE: 'Notifications',
+  SETTINGS_SCREEN_SENSORS_TITLE: 'Sensors',
   DEMO_SCREEN_TEXT: 'Demo Screen',
 };
