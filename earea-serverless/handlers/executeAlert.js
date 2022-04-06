@@ -1,8 +1,7 @@
 exports.handler = async (event) => {
 
-  // get flag of if allowed to alert
+  // get flag if alerting is enabled
   const allowedToAlert = true;
-  console.log('executeAlert Event:', event);
 
   if (allowedToAlert) {
     // execute alert in arduino
@@ -10,13 +9,6 @@ exports.handler = async (event) => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Knock Knock Knock',
-        input: event,
-      },
-      null,
-      2
-    ),
+    body: 'Executed'
   };
 };

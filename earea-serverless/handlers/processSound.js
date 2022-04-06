@@ -19,6 +19,7 @@ exports.handler = async (event, context) => {
         context.fail(err);
       } else {
         console.info('message published to SNS');
+        message = `Alert executed. ID: ${data.MessageId}`;
       }
     }).promise();
   }
