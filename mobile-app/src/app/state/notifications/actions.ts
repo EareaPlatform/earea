@@ -1,5 +1,6 @@
 import {notificationsStore} from './store';
 import {serverAPI} from './serverAPI';
+import log from '../../../services/log';
 
 const fetchNotifications = async (): Promise<NotificationData[]> => {
   return await serverAPI.getNotifications();
@@ -8,6 +9,7 @@ const fetchNotifications = async (): Promise<NotificationData[]> => {
 const initialize = (sensors: NotificationData[]) => {
   notificationsStore.setters.notifications(sensors);
   notificationsStore.setters.isInit(true);
+  log.info('Notifications Service', 'initialized data');
 };
 
 const initIfNeeded = async () => {

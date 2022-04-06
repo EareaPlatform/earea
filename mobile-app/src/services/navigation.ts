@@ -76,6 +76,12 @@ const withoutBottomTabs: Options = {
   },
 };
 
+const withTopBar: Options = {
+  topBar: {
+    visible: true,
+  },
+};
+
 const withoutTopBar: Options = {
   topBar: {
     visible: false,
@@ -104,6 +110,7 @@ const createTab = (screenId: string, tabTitle: string, icon?: any): LayoutTabsCh
 
 export const navigationService = {
   withoutBottomTabs,
+  withTopBar,
   withoutTopBar,
   registerComponent,
   registerTabs,

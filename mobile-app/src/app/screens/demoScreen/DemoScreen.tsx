@@ -5,6 +5,7 @@ import ScreenWrapper from '../../common/ScreenWrapper';
 import Section from '../../common/Section';
 import {notificationsStore} from '../../state/notifications/store';
 import {sensorsStore} from '../../state/sensors/store';
+import log from '../../../services/log';
 
 interface Action {
   label: string;
@@ -18,7 +19,7 @@ const actions: Action[] = [
       const currentStatus = notificationsStore.getters.isInit();
 
       notificationsStore.setters.isInit(!currentStatus);
-      console.log('Demo: notification isInit is', notificationsStore.getters.isInit());
+      log.debug('demo', 'notification isInit is', notificationsStore.getters.isInit());
     },
   },
   {
@@ -27,7 +28,7 @@ const actions: Action[] = [
       const currentStatus = sensorsStore.getters.isInit();
 
       sensorsStore.setters.isInit(!currentStatus);
-      console.log('Demo: sensors isInit is', sensorsStore.getters.isInit());
+      log.debug('demo', 'sensors isInit is', sensorsStore.getters.isInit());
     },
   },
 ];

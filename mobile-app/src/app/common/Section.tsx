@@ -1,5 +1,6 @@
 import React, {PropsWithChildren, useCallback, useMemo, useState} from 'react';
 import {Assets, Button, ButtonProps, ExpandableSection, Image, SkeletonView, Text, View} from 'react-native-ui-lib';
+import {StyleSheet} from 'react-native';
 
 export interface SectionProps {
   headerTitle: string;
@@ -46,7 +47,7 @@ const Section = (props: PropsWithChildren<SectionProps>) => {
     const extraProps = isExpended ? {'marginB-40': true} : {'marginB-10': true};
 
     return (
-      <View flex {...extraProps}>
+      <View flex {...extraProps} style={styles.container}>
         <ExpandableSection
           top={props.top}
           sectionHeader={headerJSX}
@@ -62,9 +63,9 @@ const Section = (props: PropsWithChildren<SectionProps>) => {
   }, [props.top, props.children, headerJSX, isExpended, toggleExpended]);
 
   const render = useCallback(() => (
-    <View flex marginB-40>
+    <View flex marginB-40 style={styles.container}>
       {headerJSX}
-      <View flex marginH-10>
+      <View flex marginH-10 marginT-5>
         {props.children}
       </View>
     </View>
@@ -80,3 +81,9 @@ const Section = (props: PropsWithChildren<SectionProps>) => {
 };
 
 export default Section;
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+});

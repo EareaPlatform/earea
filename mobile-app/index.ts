@@ -1,18 +1,19 @@
-import {registerScreens} from './src/registerScreens';
-import {navigationService} from './src/services/navigation';
 import {LogBox} from 'react-native';
-import {tabsInfo, Tab} from './src/constants/tabs';
-import {loadSkin} from './src/loadSkin';
-import {isDevMode} from './src/environment';
-import {screenIds} from './src/constants/screenIds';
 import {LayoutTabsChildren} from 'react-native-navigation';
+import {navigationService} from './src/services/navigation';
+import log from './src/services/log';
+import {registerScreens} from './src/registerScreens';
+import {tabsInfo, Tab} from './src/constants/tabs';
+import {isDevMode} from './src/constants/environment';
+import {screenIds} from './src/constants/screenIds';
+import {loadSkin} from './src/loadSkin';
 
 LogBox.ignoreAllLogs(true);
 
 loadSkin();
 registerScreens();
 
-console.log('Environment:', process.env.NODE_ENV);
+log.complex('Environment', process.env.NODE_ENV);
 
 navigationService.registerTabs(
   tabsInfo.reduce((previousTabs: LayoutTabsChildren[], currentTab: Tab) => {

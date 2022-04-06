@@ -1,5 +1,6 @@
 import {sensorsStore} from './store';
 import {serverAPI} from './serverAPI';
+import log from '../../../services/log';
 
 const fetchSensors = async (): Promise<Sensor[]> => {
   return serverAPI.getSensors();
@@ -8,6 +9,7 @@ const fetchSensors = async (): Promise<Sensor[]> => {
 const initialize = (sensors: Sensor[]) => {
   sensorsStore.setters.sensors(sensors);
   sensorsStore.setters.isInit(true);
+  log.info('Sensors Service', 'initialized data');
 };
 
 const initIfNeeded = async () => {

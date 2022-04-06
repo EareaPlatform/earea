@@ -2,9 +2,12 @@ import {Colors, ThemeManager, Typography} from 'react-native-ui-lib';
 
 export const loadSkin = () => {
   Typography.loadTypographies({
+    'screenTitle': {...Typography.text20BO, fontStyle: 'italic'},
     'header': {...Typography.text60M},
+    'subHeader': {...Typography.text80M},
     'body': {...Typography.text80},
-    'screenTitle': {...Typography.text20},
+    'bodyMedium': {...Typography.text80M},
+    'bodyBold': {...Typography.text80BO},
   });
 
   ThemeManager.setComponentTheme('Button', {
