@@ -4,7 +4,7 @@ export const strings = {
   TAB_DEMO_LABEL: 'Demo',
   MAIN_SCREEN_TITLE: 'Earea',
   MAIN_SCREEN_NOTIFICATIONS_TITLE: 'Last notifications',
-  MAIN_SCREEN_SENSORS_TITLE: 'Sensors status',
+  MAIN_SCREEN_SENSORS_TITLE: 'Sensors',
   SETTINGS_SCREEN_TITLE: 'Settings',
   SETTINGS_SCREEN_NOTIFICATIONS_TITLE: 'Notifications',
   SETTINGS_SCREEN_SENSORS_TITLE: 'Sensors',

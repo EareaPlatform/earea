@@ -1,5 +1,11 @@
+enum SensorType {
+  VIBRATION = 'vibration-sensor',
+  SOUND = 'sound-sensor',
+}
+
 interface Sensor {
   id: string;
+  type: SensorType;
   title: string;
   isOnline: boolean;
   lastActivity: Date;
@@ -7,6 +13,6 @@ interface Sensor {
 
 interface NotificationData {
   id: string;
-  fromSensorId: string;
+  sensorOriginId: string;
   time: Date;
 }

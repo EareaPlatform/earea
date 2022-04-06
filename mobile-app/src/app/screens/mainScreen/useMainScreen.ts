@@ -16,24 +16,26 @@ export interface UseMainScreen {
   showSensors: boolean;
 }
 
+export const AMOUNT_TO_SHOW = 3;
+
 export const useMainScreen = (): UseMainScreen => {
   const {sensors, loaded: showSensors} = useSensors();
   const {notifications, loaded: showNotifications} = useNotifications();
 
-  const notificationsToShow: ItemToShow[] = useMemo(() => _.take(notifications, 5).map((notification: NotificationData) => {
-    const sensor = sensors.find((item: Sensor) => item.id === notification.fromSensorId);
+  const notificationsToShow: ItemToShow[] = useMemo(() => _.take(notifications, AMOUNT_TO_SHOW).map((notification: NotificationData) => {
+    const sensor = sensors.find((item: Sensor) => item.id === notification.sensorOriginId);
 
     return {
       key: notification.id,
-      title: sensor ? sensor.title : '',
-      rightText: notification.time.toLocaleString(),
+      title: sensor?.title ?? '',
+      rightText: `${notification.time.toLocaleDateString('he-IL')} - ${notification.time.toLocaleTimeString('en-US')}`,
     };
   }), [sensors, notifications]);
 
-  const sensorsToShow: ItemToShow[] = useMemo(() => _.take(sensors, 3).map((sensor: Sensor) => ({
+  const sensorsToShow: ItemToShow[] = useMemo(() => _.take(sensors, AMOUNT_TO_SHOW).map((sensor: Sensor) => ({
     key: sensor.id,
     title: sensor.title,
-    rightText: sensor.isOnline ? 'Online' : 'Offline',
+    rightText: '',
   })), [sensors]);
 
   return {

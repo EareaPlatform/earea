@@ -1,11 +1,8 @@
 import {sensorsStore} from './store';
+import {serverAPI} from './serverAPI';
 
-const fetchSensors = (): Sensor[] => {
-  return [
-    {id: 'sensor-1', title: 'Audio 1', isOnline: false, lastActivity: new Date()},
-    {id: 'sensor-2', title: 'Audio 2', isOnline: true, lastActivity: new Date()},
-    {id: 'sensor-3', title: 'Vibration 1', isOnline: false, lastActivity: new Date()},
-  ];
+const fetchSensors = async (): Promise<Sensor[]> => {
+  return serverAPI.getSensors();
 };
 
 const initialize = (sensors: Sensor[]) => {
@@ -13,10 +10,10 @@ const initialize = (sensors: Sensor[]) => {
   sensorsStore.setters.isInit(true);
 };
 
-const initIfNeeded = () => {
+const initIfNeeded = async () => {
   if (!sensorsStore.getters.isInit()) {
     const data = fetchSensors();
-    initialize(data);
+    initialize(await data);
   }
 };
 

@@ -57,7 +57,7 @@ export default MainScreen;
 const styles = StyleSheet.create({
   item: {
     width: '100%',
-    height: 50,
+    height: 70,
     borderRadius: 10,
   },
 });
