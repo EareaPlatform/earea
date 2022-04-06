@@ -19,3 +19,28 @@ functions:
 
   executeAlert:
     handler: handlers/executeAlert.handler
+    events:
+      - httpApi:
+          path: /executeAlert
+          method: post
+
+  getLastNotifications:
+    handler: handlers/getLastNotifications.handler
+    events:
+      - httpApi:
+          path: /getNotifications
+          method: get
+
+  getIsNotificationsEnabled:
+    handler: handlers/getIsNotificationsEnabled.handler
+    events:
+      - httpApi:
+          path: /NotificationStatus
+          method: get
+
+  getSensorsList:
+    handler: handlers/getSensorsList.handler
+    events:
+      - httpApi:
+          path: /getSensors
+          method: get
