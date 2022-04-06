@@ -25,7 +25,7 @@ functions:
           method: post
 
   getLastNotifications:
-    handler: handlers/getLastNotifications.handler
+    handler: handlers/getNotifications.handler
     events:
       - httpApi:
           path: /getNotifications

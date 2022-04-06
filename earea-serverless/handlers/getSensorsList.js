@@ -26,7 +26,7 @@ exports.handler = async (event) => {
     //const { amountToFetch, pageNumber } = JSON.parse(event.body);
 
     const sensorsData = {
-        notificationsData: mockSensors(),
+        sensorsData: mockSensors(),
         amountOfPages: 1,
         currentPage: 1,
     };
