@@ -7,12 +7,13 @@ const mockNotifications = (amountToMock = 10, sensors) => {
     };
 
     const result = []
+    const sensorsAmount = 6;
 
     for (let i = 0; i < amountToMock; i++) {
         //const sensor = Math.floor(Math.random()*3);
         result.push({
-            id: `notification-${i}`,
-            fromSensorId: i%2 === 0? `vibration-sensor-${i}` : `sound-sensor-${i}`,
+            id: `${i}`,
+            sensorOriginName: i%2 === 0? `Vibration ${i%sensorsAmount}` : `Sound ${i%sensorsAmount}`,
             time: randomDate(),
         });
     }
@@ -28,8 +29,6 @@ exports.handler = async (event) => {
         amountOfPages: 2,
         currentPage: 1,
     };
-
-    const currentPageString = '1';
 
     return {
         statusCode: 200,

@@ -9,9 +9,11 @@ const mockSensors = (amountToMock = 6) => {
     const result = [];
 
     for (let i = 0; i < amountToMock; i++) {
+        const type = i%3 === 0? `sound-sensor` : `vibration-sensor`
         result.push({
-            id: `sensor-${i}`,
-            title: i%3 === 0? `sound-sensor-${i}` : `vibration-sensor-${i}`,
+            id: `${i}`,
+            type: `${type}`,
+            title: i%3 === 0? `Sound ${i}` : `Vibration ${i}`,
             isOnline: false,
             lastActivity: randomDate(),
         });
@@ -28,8 +30,6 @@ exports.handler = async (event) => {
         amountOfPages: 1,
         currentPage: 1,
     };
-
-    const sensorsDataString = JSON.stringify(sensorsData, null, 2);
 
     return {
         statusCode: 200,
