@@ -13,7 +13,7 @@ const mockSensors = (amountToMock = 6) => {
         result.push({
             id: `${i}`,
             type: `${type}`,
-            title: i % 3 === 0 ? `sound-${i}` : `vibration-${i}`,
+            title: i % 3 === 0 ? `Sound ${i}` : `Vibration ${i}`,
             isOnline: false,
             lastActivity: randomDate(),
         });
