@@ -13,7 +13,7 @@ const mockNotifications = (amountToMock = 10, sensors) => {
         //const sensor = Math.floor(Math.random()*3);
         result.push({
             id: `${i}`,
-            sensorOriginName: i % 2 === 0 ? `sound-${i % sensorsAmount}` : `vibration-${i % sensorsAmount}`,
+            sensorOriginName: i % 3 === 0 ? `sound-${i % sensorsAmount}` : `vibration-${i % sensorsAmount}`,
             time: randomDate(),
         });
     }
