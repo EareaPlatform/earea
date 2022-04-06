@@ -9,11 +9,11 @@ const mockSensors = (amountToMock = 6) => {
     const result = [];
 
     for (let i = 0; i < amountToMock; i++) {
-        const type = i%3 === 0? `sound-sensor` : `vibration-sensor`
+        const type = i%3 === 0? `sound-sensor` : `vibration-sensor`;
         result.push({
             id: `${i}`,
             type: `${type}`,
-            title: i%3 === 0? `Sound ${i}` : `Vibration ${i}`,
+            title: i % 3 === 0 ? `sound-${i}` : `vibration-${i}`,
             isOnline: false,
             lastActivity: randomDate(),
         });
