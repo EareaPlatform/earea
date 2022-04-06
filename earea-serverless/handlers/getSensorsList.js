@@ -11,9 +11,9 @@ const mockSensors = (amountToMock = 6) => {
     for (let i = 0; i < amountToMock; i++) {
         const type = i%3 === 0? `sound-sensor` : `vibration-sensor`;
         result.push({
-            id: `${i}`,
+            id: i % 3 === 0 ? `sound-${i}` : `vibration-${i}`,
             type: `${type}`,
-            title: i % 3 === 0 ? `sound-${i}` : `vibration-${i}`,
+            title: i % 3 === 0 ? `Sound ${i}` : `Vibration ${i}`,
             isOnline: false,
             lastActivity: randomDate(),
         });
@@ -26,7 +26,7 @@ exports.handler = async (event) => {
     //const { amountToFetch, pageNumber } = JSON.parse(event.body);
 
     const sensorsData = {
-        notificationsData: mockSensors(),
+        sensorsData: mockSensors(),
         amountOfPages: 1,
         currentPage: 1,
     };
