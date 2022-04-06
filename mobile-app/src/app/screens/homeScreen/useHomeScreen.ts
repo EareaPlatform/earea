@@ -9,7 +9,7 @@ export interface ItemToShow {
   rightText: string;
 }
 
-export interface UseMainScreen {
+export interface UseHomeScreen {
   notificationsToShow: ItemToShow[];
   sensorsToShow: ItemToShow[];
   showNotifications: boolean;
@@ -18,7 +18,7 @@ export interface UseMainScreen {
 
 export const AMOUNT_TO_SHOW = 3;
 
-export const useMainScreen = (): UseMainScreen => {
+export const useHomeScreen = (): UseHomeScreen => {
   const {sensors, loaded: showSensors} = useSensors();
   const {notifications, loaded: showNotifications} = useNotifications();
 

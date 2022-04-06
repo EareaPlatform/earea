@@ -1,18 +1,18 @@
 import React, {useCallback} from 'react';
 import {View, Text, Colors} from 'react-native-ui-lib';
 import {strings} from '../../../constants/strings';
-import {ItemToShow, useMainScreen} from './useMainScreen';
+import {ItemToShow, useHomeScreen} from './useHomeScreen';
 import {StyleSheet} from 'react-native';
 import ScreenWrapper from '../../common/ScreenWrapper';
 import Section from '../../common/Section';
 
-const MainScreen = React.memo(() => {
+const HomeScreen = React.memo(() => {
   const {
     notificationsToShow,
     sensorsToShow,
     showNotifications,
     showSensors,
-  } = useMainScreen();
+  } = useHomeScreen();
 
   const renderItem = useCallback((item: ItemToShow) => (
     <View
@@ -33,16 +33,16 @@ const MainScreen = React.memo(() => {
 
   return (
     <ScreenWrapper>
-      <Text screenTitle violet30 marginB-20>{strings.MAIN_SCREEN_TITLE}</Text>
+      <Text screenTitle violet30 marginB-20>{strings.HOME_SCREEN_TITLE}</Text>
       <Section
-        headerTitle={strings.MAIN_SCREEN_NOTIFICATIONS_TITLE}
+        headerTitle={strings.HOME_SCREEN_NOTIFICATIONS_TITLE}
         loading={!showNotifications}
         rightButton={showNotifications ? {label: 'View all'} : undefined}
       >
         {notificationsToShow.map(renderItem)}
       </Section>
       <Section
-        headerTitle={strings.MAIN_SCREEN_SENSORS_TITLE}
+        headerTitle={strings.HOME_SCREEN_SENSORS_TITLE}
         loading={!showSensors}
         rightButton={showSensors ? {label: 'View all'} : undefined}
       >
@@ -52,7 +52,7 @@ const MainScreen = React.memo(() => {
   );
 });
 
-export default MainScreen;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   item: {

@@ -6,9 +6,9 @@ export interface Tab {
   title: string;
 }
 
-export const mainTab: Tab = {
-  screenId: screenIds.mainScreen,
-  title: strings.TAB_MAIN_SCREEN_LABEL,
+export const homeTab: Tab = {
+  screenId: screenIds.homeScreen,
+  title: strings.TAB_HOME_SCREEN_LABEL,
 };
 
 export const settingsTab: Tab = {
@@ -22,7 +22,7 @@ export const demoTab: Tab = {
 };
 
 export const tabsInfo: Tab[] = [
-  mainTab,
+  homeTab,
   settingsTab,
   demoTab,
 ];
