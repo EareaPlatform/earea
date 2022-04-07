@@ -5,6 +5,7 @@ Earea - project to help hard of hearing people
 * https://github.com/ostaquet/Arduino-Nano-33-IoT-Ultimate-Guide
 * https://www.youtube.com/watch?v=PYkzJQhFNlA
 * https://aws.amazon.com/blogs/compute/building-an-aws-iot-core-device-using-aws-serverless-and-an-esp32/
+* https://github.com/aws-samples/aws-iot-workshop/blob/master/README.md
 
 ### Naming conventions
 * Folders - camel-case
