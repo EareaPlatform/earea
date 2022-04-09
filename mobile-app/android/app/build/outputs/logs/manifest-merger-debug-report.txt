@@ -5,9 +5,11 @@ INJECTED from /Users/amitshw/github/earea/mobile-app/android/app/src/main/Androi
 INJECTED from /Users/amitshw/github/earea/mobile-app/android/app/src/main/AndroidManifest.xml:1:1-25:12
 INJECTED from /Users/amitshw/github/earea/mobile-app/android/app/src/main/AndroidManifest.xml:1:1-25:12
 MERGED from /Users/amitshw/github/earea/mobile-app/android/app/src/main/AndroidManifest.xml:1:1-25:12
+MERGED from [hermes-debug.aar] /Users/amitshw/.gradle/caches/transforms-3/2ff24b61289669aa0c1f3eee8b068a18/transformed/jetified-hermes-debug/AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.flipper:flipper:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/7c073e4694620846a5d195f8782395ba/transformed/jetified-flipper-0.99.0/AndroidManifest.xml:8:1-18:12
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/69be4ca806b0d1ac45f2c337d56c720a/transformed/jetified-flipper-network-plugin-0.99.0/AndroidManifest.xml:8:1-15:12
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/7f1d5e61d139b7eb8fda5b5a60e2290f/transformed/jetified-flipper-fresco-plugin-0.99.0/AndroidManifest.xml:8:1-15:12
+MERGED from [:react-native-picker_picker] /Users/amitshw/github/earea/mobile-app/node_modules/@react-native-picker/picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-navigation] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-navigation/lib/android/app/build/intermediates/merged_manifest/reactNative63Debug/AndroidManifest.xml:2:1-15:12
 MERGED from [:react-native-ui-lib] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-ui-lib/lib/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
@@ -16,9 +18,8 @@ MERGED from [com.github.wix-playground:reflow-animator:1.0.6] /Users/amitshw/.gr
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/amitshw/.gradle/caches/transforms-3/c701132eb51e862ad44e18438e9873fd/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/amitshw/.gradle/caches/transforms-3/3145b52b19174e175b629bd478b6ee6a/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/amitshw/.gradle/caches/transforms-3/42db50a19d84159e3f4c614c55bbabd3/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [org.webkit:android-jsc:r250230] /Users/amitshw/.gradle/caches/transforms-3/de2d9e7fbda1debb6fffb5aa5e419aba/transformed/jetified-android-jsc-r250230/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-linear-gradient] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-reanimated] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-reanimated/android/build/.transforms/8ba7274778db12d467339e678463da31/transformed/jetified-react-native-reanimated-65-jsc/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-reanimated] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-reanimated/android/build/.transforms/a4793cc7c18f804fc2dd432380f8d2f0/transformed/jetified-react-native-reanimated-65-hermes/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:flipper:2.5.0] /Users/amitshw/.gradle/caches/transforms-3/ebc789c154c469c5d2247275ba1efae8/transformed/jetified-flipper-2.5.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:stetho:2.5.0] /Users/amitshw/.gradle/caches/transforms-3/ce3fcd42be6e3051f5855241b315d129/transformed/jetified-stetho-2.5.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:fresco:2.5.0] /Users/amitshw/.gradle/caches/transforms-3/25c4adb8d9644a78485b9273a1be8141/transformed/jetified-fresco-2.5.0/AndroidManifest.xml:2:1-9:12
@@ -179,12 +180,16 @@ uses-sdk
 INJECTED from /Users/amitshw/github/earea/mobile-app/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/amitshw/github/earea/mobile-app/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/amitshw/github/earea/mobile-app/android/app/src/main/AndroidManifest.xml
+MERGED from [hermes-debug.aar] /Users/amitshw/.gradle/caches/transforms-3/2ff24b61289669aa0c1f3eee8b068a18/transformed/jetified-hermes-debug/AndroidManifest.xml:5:5-44
+MERGED from [hermes-debug.aar] /Users/amitshw/.gradle/caches/transforms-3/2ff24b61289669aa0c1f3eee8b068a18/transformed/jetified-hermes-debug/AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.flipper:flipper:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/7c073e4694620846a5d195f8782395ba/transformed/jetified-flipper-0.99.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/7c073e4694620846a5d195f8782395ba/transformed/jetified-flipper-0.99.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/69be4ca806b0d1ac45f2c337d56c720a/transformed/jetified-flipper-network-plugin-0.99.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/69be4ca806b0d1ac45f2c337d56c720a/transformed/jetified-flipper-network-plugin-0.99.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/7f1d5e61d139b7eb8fda5b5a60e2290f/transformed/jetified-flipper-fresco-plugin-0.99.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.99.0] /Users/amitshw/.gradle/caches/transforms-3/7f1d5e61d139b7eb8fda5b5a60e2290f/transformed/jetified-flipper-fresco-plugin-0.99.0/AndroidManifest.xml:11:5-13:41
+MERGED from [:react-native-picker_picker] /Users/amitshw/github/earea/mobile-app/node_modules/@react-native-picker/picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-picker_picker] /Users/amitshw/github/earea/mobile-app/node_modules/@react-native-picker/picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-navigation] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-navigation/lib/android/app/build/intermediates/merged_manifest/reactNative63Debug/AndroidManifest.xml:5:5-7:41
@@ -201,12 +206,10 @@ MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/amitshw/.gradl
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/amitshw/.gradle/caches/transforms-3/3145b52b19174e175b629bd478b6ee6a/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/amitshw/.gradle/caches/transforms-3/42db50a19d84159e3f4c614c55bbabd3/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/amitshw/.gradle/caches/transforms-3/42db50a19d84159e3f4c614c55bbabd3/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [org.webkit:android-jsc:r250230] /Users/amitshw/.gradle/caches/transforms-3/de2d9e7fbda1debb6fffb5aa5e419aba/transformed/jetified-android-jsc-r250230/AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r250230] /Users/amitshw/.gradle/caches/transforms-3/de2d9e7fbda1debb6fffb5aa5e419aba/transformed/jetified-android-jsc-r250230/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-linear-gradient] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-linear-gradient] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-linear-gradient/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-reanimated] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-reanimated/android/build/.transforms/8ba7274778db12d467339e678463da31/transformed/jetified-react-native-reanimated-65-jsc/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-reanimated] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-reanimated/android/build/.transforms/8ba7274778db12d467339e678463da31/transformed/jetified-react-native-reanimated-65-jsc/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-reanimated] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-reanimated/android/build/.transforms/a4793cc7c18f804fc2dd432380f8d2f0/transformed/jetified-react-native-reanimated-65-hermes/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-reanimated] /Users/amitshw/github/earea/mobile-app/node_modules/react-native-reanimated/android/build/.transforms/a4793cc7c18f804fc2dd432380f8d2f0/transformed/jetified-react-native-reanimated-65-hermes/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:flipper:2.5.0] /Users/amitshw/.gradle/caches/transforms-3/ebc789c154c469c5d2247275ba1efae8/transformed/jetified-flipper-2.5.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:flipper:2.5.0] /Users/amitshw/.gradle/caches/transforms-3/ebc789c154c469c5d2247275ba1efae8/transformed/jetified-flipper-2.5.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:stetho:2.5.0] /Users/amitshw/.gradle/caches/transforms-3/ce3fcd42be6e3051f5855241b315d129/transformed/jetified-stetho-2.5.0/AndroidManifest.xml:5:5-7:41

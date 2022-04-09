@@ -1,10 +1,10 @@
 import React, {useCallback} from 'react';
-import {View, Text, Colors} from 'react-native-ui-lib';
+import {Text, View} from 'react-native-ui-lib';
 import {strings} from '../../../constants/strings';
-import {ItemToShow, useHomeScreen} from './useHomeScreen';
-import {StyleSheet} from 'react-native';
+import {useHomeScreen} from './useHomeScreen';
 import ScreenWrapper from '../../common/ScreenWrapper';
 import Section from '../../common/Section';
+import ListItem, {ListItemProps} from '../../common/ListItem';
 
 export interface HomeScreenProps {
   componentId: string;
@@ -20,19 +20,9 @@ const HomeScreen = (props: HomeScreenProps) => {
     sensorsViewAllCta,
   } = useHomeScreen({componentId: props.componentId});
 
-  const renderItem = useCallback((item: ItemToShow) => (
-    <View
-      key={item.key}
-      backgroundColor={Colors.yellow70}
-      style={styles.item}
-      row
-      spread
-      centerV
-      marginV-10
-      paddingH-30
-    >
-      <Text bodyMedium>{item.title}</Text>
-      <Text body>{item.rightText}</Text>
+  const renderItem = useCallback((item: ListItemProps) => (
+    <View key={item.id}>
+      <ListItem {...item} />
     </View>
   ), []);
 
@@ -58,10 +48,3 @@ const HomeScreen = (props: HomeScreenProps) => {
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  item: {
-    height: 70,
-    borderRadius: 20,
-  },
-});

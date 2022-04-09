@@ -1,29 +1,19 @@
 import React, {useCallback} from 'react';
 import {StyleSheet} from 'react-native';
-import {Colors, StateScreen, Text, View} from 'react-native-ui-lib';
-import {ItemToShow} from '../homeScreen/useHomeScreen';
+import {StateScreen, Text, View} from 'react-native-ui-lib';
 import ScreenWrapper from '../../common/ScreenWrapper';
 import {strings} from '../../../constants/strings';
+import ListItem, {ListItemProps} from '../../common/ListItem';
 
 export interface ViewAllScreenProps {
   title: string;
-  items: ItemToShow[];
+  items: ListItemProps[];
 }
 
 const ViewAllScreen = (props: ViewAllScreenProps) => {
-  const renderItem = useCallback((item: ItemToShow) => (
-    <View
-      key={item.key}
-      backgroundColor={Colors.yellow70}
-      style={styles.item}
-      row
-      spread
-      centerV
-      marginV-10
-      paddingH-30
-    >
-      <Text bodyMedium>{item.title}</Text>
-      <Text body>{item.rightText}</Text>
+  const renderItem = useCallback((item: ListItemProps) => (
+    <View key={item.id}>
+      <ListItem {...item} />
     </View>
   ), []);
 
@@ -54,9 +44,5 @@ export default ViewAllScreen;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-  },
-  item: {
-    height: 70,
-    borderRadius: 20,
   },
 });

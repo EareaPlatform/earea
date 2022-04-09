@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {LogBox} from 'react-native';
 import {LayoutTabsChildren} from 'react-native-navigation';
 import {navigationService} from './src/services/navigation';
