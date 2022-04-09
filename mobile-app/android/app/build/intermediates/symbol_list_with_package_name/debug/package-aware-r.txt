@@ -1715,6 +1715,7 @@ drawable ic_arrow_back_black_24dp
 drawable ic_arrow_back_black_rtl_24dp
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
+drawable ic_dropdown
 drawable ic_edit_black_24dp
 drawable ic_keyboard_arrow_left_black_24dp
 drawable ic_keyboard_arrow_right_black_24dp
@@ -1750,6 +1751,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable redbox_top_border_background
 drawable rn_edit_text_material
+drawable spinner_dropdown_background
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -1913,6 +1915,8 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
+id dropdown_background
+id dropdown_icon
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -2320,6 +2324,8 @@ layout redbox_view
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout simple_spinner_dropdown_item
+layout simple_spinner_item
 layout support_simple_spinner_dropdown_item
 layout test_action_chip
 layout test_design_checkbox

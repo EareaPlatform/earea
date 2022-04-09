@@ -1,11 +1,13 @@
 import {screenIds} from './constants/screenIds';
 import {navigationService} from './services/navigation';
-import MainScreen from './app/screens/mainScreen/';
-import SystemPreferences from './app/screens/settingsScreen/';
+import HomeScreen from './app/screens/homeScreen/';
+import SettingsScreen from './app/screens/settingsScreen/';
 import DemoScreen from './app/screens/demoScreen/';
+import ViewAllScreen from './app/screens/viewAllScreen';
 
 export const registerScreens = () => {
-  navigationService.registerComponent(screenIds.mainScreen, () => MainScreen);
-  navigationService.registerComponent(screenIds.settingsScreen, () => SystemPreferences);
   navigationService.registerComponent(screenIds.demoScreen, () => DemoScreen);
+  navigationService.registerComponent(screenIds.homeScreen, () => HomeScreen);
+  navigationService.registerComponent(screenIds.settingsScreen, () => SettingsScreen);
+  navigationService.registerComponent(screenIds.viewAllScreen, () => ViewAllScreen);
 };

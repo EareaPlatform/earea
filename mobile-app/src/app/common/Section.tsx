@@ -1,5 +1,15 @@
 import React, {PropsWithChildren, useCallback, useMemo, useState} from 'react';
-import {Button, ButtonProps, ExpandableSection, SkeletonView, Text, View} from 'react-native-ui-lib';
+import {
+  Assets,
+  Button,
+  ButtonProps,
+  ExpandableSection,
+  Image,
+  SkeletonView,
+  Text,
+  View,
+} from 'react-native-ui-lib';
+import {StyleSheet} from 'react-native';
 
 export interface SectionProps {
   headerTitle: string;
@@ -9,6 +19,8 @@ export interface SectionProps {
   rightButton?: ButtonProps;
 }
 
+const ICON_SIZE = 24;
+
 const Section = (props: PropsWithChildren<SectionProps>) => {
   const [isExpended, setIsExpended] = useState(true);
 
@@ -16,14 +28,23 @@ const Section = (props: PropsWithChildren<SectionProps>) => {
     setIsExpended(!isExpended);
   }, [isExpended]);
 
-  const headerJSX = useMemo(() => (
-    <View flex row spread>
-      <Text header marginB-10>{props.headerTitle}</Text>
-      {
-        props.rightButton && <Button link {...props.rightButton} />
-      }
-    </View>
-  ), [props.headerTitle, props.rightButton]);
+  const headerJSX = useMemo(() => {
+    return (
+      <View flex row spread>
+        <View flex row>
+          {
+            props.expandable && !isExpended && (
+              <Image source={Assets.icons.plusSmall} width={ICON_SIZE} height={ICON_SIZE} marginR-10 />
+            )
+          }
+          <Text header marginB-10>{props.headerTitle}</Text>
+        </View>
+        {
+          props.rightButton && <Button link {...props.rightButton} />
+        }
+      </View>
+    );
+  }, [props.headerTitle, props.rightButton, isExpended, props.expandable]);
 
   // TODO: calculate width by device screen width
   const renderLoadingState = useCallback(() => (
@@ -33,25 +54,29 @@ const Section = (props: PropsWithChildren<SectionProps>) => {
     </View>
   ), [headerJSX]);
 
-  const renderExpandable = useCallback(() => (
-    <View flex marginB-40>
-      <ExpandableSection
-        top={props.top}
-        sectionHeader={headerJSX}
-        expanded={isExpended}
-        onPress={toggleExpended}
-      >
-        <View flex marginH-10>
-          {props.children}
-        </View>
-      </ExpandableSection>
-    </View>
-  ), [props.top, props.children, headerJSX, isExpended, toggleExpended]);
+  const renderExpandable = useCallback(() => {
+    const extraProps = isExpended ? {'marginB-40': true} : {'marginB-10': true};
+
+    return (
+      <View flex {...extraProps} style={styles.container}>
+        <ExpandableSection
+          top={props.top}
+          sectionHeader={headerJSX}
+          expanded={isExpended}
+          onPress={toggleExpended}
+        >
+          <View flex marginH-10>
+            {props.children}
+          </View>
+        </ExpandableSection>
+      </View>
+    );
+  }, [props.top, props.children, headerJSX, isExpended, toggleExpended]);
 
   const render = useCallback(() => (
-    <View flex marginB-40>
+    <View flex marginB-40 style={styles.container}>
       {headerJSX}
-      <View flex marginH-10>
+      <View flex marginH-10 marginT-5>
         {props.children}
       </View>
     </View>
@@ -67,3 +92,9 @@ const Section = (props: PropsWithChildren<SectionProps>) => {
 };
 
 export default Section;
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+});

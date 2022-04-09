@@ -1,18 +1,25 @@
 import React, {PropsWithChildren} from 'react';
 import {ScrollView} from 'react-native';
-import {View} from 'react-native-ui-lib';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {Constants, View} from 'react-native-ui-lib';
 
 export interface ScreenWrapperProps {
   scrollable?: boolean;
+  withTopBar?: boolean;
 }
 
 const ScreenWrapper = (props: PropsWithChildren<ScreenWrapperProps>) => {
+  const containerExtraProps = Constants.isIOS ? {'paddingT-75': true} : {'paddingT-20': true};
+  const innerExtraProps = props.withTopBar ? {'paddingT-20': true} : {};
+
   return (
-    <View flex marginT-70>
+    <View flex useSafeArea bg-white {...containerExtraProps}>
       <ScrollView scrollEnabled={props.scrollable}>
-        <View flex bg-white paddingH-20>
-          {props.children}
-        </View>
+        <GestureHandlerRootView>
+          <View flex paddingH-20 {...innerExtraProps}>
+            {props.children}
+          </View>
+        </GestureHandlerRootView>
       </ScrollView>
     </View>
   );
