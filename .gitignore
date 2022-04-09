@@ -58,4 +58,4 @@ buck-out/
 
 # CocoaPods
 mobile-app/ios/Pods/
-mobile-app/android/app/build/.
+mobile-app/android/app/build/
