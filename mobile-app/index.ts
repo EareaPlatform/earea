@@ -18,7 +18,10 @@ registerScreens();
 log.complex('Environment', process.env.NODE_ENV);
 
 PushNotification.configure({
-  onNotification: (notification) => {
+  onRegister: (token: any) => {
+    console.log('Registration token:', {token});
+  },
+  onNotification: (notification: any) => {
     console.log('NOTIFICATION:', notification);
 
     // process the notification
@@ -26,7 +29,7 @@ PushNotification.configure({
     // (required) Called when a remote is received or opened, or local notification is opened
     // notification.finish(PushNotificationIOS.FetchResult.NoData);
   },
-  onRegistrationError: (err) => {
+  onRegistrationError: (err: any) => {
     console.error('Notification failed', err.message, err);
   },
   popInitialNotification: true,
