@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "519604982354",
+    "project_id": "earea-83b19",
+    "storage_bucket": "earea-83b19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519604982354:android:7b49ece091e400f04f058b",
+        "android_client_info": {
+          "package_name": "com.eareamobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519604982354-lrsa5dh0kqit40ocab9ia1e5f1lfap7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmo-TgNn6v3Sa-STD7ZHT3nv1pBVHU0ug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519604982354-lrsa5dh0kqit40ocab9ia1e5f1lfap7g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

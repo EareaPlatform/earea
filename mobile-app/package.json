@@ -36,6 +36,7 @@
     "@types/lodash": "^4.14.181",
     "@types/react": "^17.0.34",
     "@types/react-native": "^0.66.3",
+    "@types/react-native-push-notification": "^8.1.1",
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
