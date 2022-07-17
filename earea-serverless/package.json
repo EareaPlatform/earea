@@ -5,6 +5,7 @@
     "deploy": "sls deploy"
   },
   "dependencies": {
+    "aws-sdk": "^2.1176.0",
     "firebase-admin": "^9.6.0"
   },
   "devDependencies": {}
