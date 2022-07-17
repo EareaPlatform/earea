@@ -1,0 +1,2 @@
+#define SECRET_SSID "RTM"
+#define SECRET_PASS "0528341534"
