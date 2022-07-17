@@ -12,11 +12,13 @@ exports.handler = async (event) => {
   const allowedToAlert = true;
   let res = {};
 
+  const snsRawMessage = JSON.parse(event?.Records?.[0]?.Sns?.Message ?? {});
+
   if (allowedToAlert) {
     const message = {
       notification: {
-        title: event?.title ?? 'Hey you!',
-        body: event?.message ?? 'Some sensors found something',
+        title: snsRawMessage?.title ?? 'Hey you!',
+        body: snsRawMessage?.body ?? 'Some sensors found something',
       },
       data: {
         someKey: 'someValue'

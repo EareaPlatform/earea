@@ -12,7 +12,7 @@ exports.handler = async (event) => {
             return parseInt(number, 10);
         });
 
-        shouldAlert = soundValuesArray.filter((number) => { return number >= 20}).length >= 3;//.reduce((previousSum, currentValue) => previousSum + currentValue, 0) > 20;
+        shouldAlert = soundValuesArray.filter((number) => { return number >= 15}).length >= 3;//.reduce((previousSum, currentValue) => previousSum + currentValue, 0) > 20;
     }
 
     if (shouldAlert) {
@@ -20,21 +20,23 @@ exports.handler = async (event) => {
         // call lambda: Execute al
         const sns = new AWS.SNS();
 
-        await sns.publish({
-            Message: {
-                title: 'Event Detected',
-                message: 'Someone Knocked on Your door'
-            },
-            TopicArn: "arn:aws:sns:eu-central-1:249409715289:ExecuteAlert"
-        }, function(err, data) {
+        try{
+            await sns.publish({
+                Message: JSON.stringify({
+                    title: 'Event Detected',
+                    body: 'Someone is at the door'
+                }),
+                TopicArn: "arn:aws:sns:eu-central-1:249409715289:ExecuteAlert"
+            }).promise();
+        }catch (err){
             if(err) {
                 console.error('error publishing to SNS');
-                context.fail(err);
+                err.context.fail(err);
             } else {
                 console.info('message published to SNS');
-                message = `Alert executed. ID: ${data.MessageId}`;
+                message = `Alert executed. ID: ${err.data.MessageId}`;
             }
-        }).promise();
+        }
     };
 
     return {
