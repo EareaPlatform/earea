@@ -21,7 +21,10 @@ exports.handler = async (event) => {
         const sns = new AWS.SNS();
 
         await sns.publish({
-            Message: "alert",
+            Message: {
+                title: 'Event Detected',
+                message: 'Someone Knocked on Your door'
+            },
             TopicArn: "arn:aws:sns:eu-central-1:249409715289:ExecuteAlert"
         }, function(err, data) {
             if(err) {
