@@ -3,10 +3,16 @@ const AWS = require('aws-sdk');
 exports.handler = async (event) => {
     // call AI to decide if to alert
     let shouldAlert = false;
+
     if(event.isBase64Encoded != undefined && event.isBase64Encoded){
-        const eventBody = Buffer.from(event.body, 'base64').toString('ascii');
-        shouldAlert = eventBody === 'true'//? false : event.data.reduce((previousSum, currentValue) => previousSum + currentValue, 0) > 20;
-        console.log('event body decoded:', eventBody);
+        const decodedEventBody = Buffer.from(event.body, 'base64').toString('ascii');
+        console.log('event body decoded:', decodedEventBody);
+
+        const soundValuesArray = decodedEventBody.split(',').map((number) => {
+            return parseInt(number, 10);
+        });
+
+        shouldAlert = soundValuesArray.filter((number) => { return number >= 20}).length >= 3;//.reduce((previousSum, currentValue) => previousSum + currentValue, 0) > 20;
     }
 
     if (shouldAlert) {
