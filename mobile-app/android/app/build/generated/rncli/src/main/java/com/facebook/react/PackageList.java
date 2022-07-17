@@ -19,6 +19,8 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 // react-native-navigation
 import com.reactnativenavigation.react.NavigationPackage;
+// react-native-push-notification
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-ui-lib
@@ -75,6 +77,7 @@ public class PackageList {
       new RNGestureHandlerPackage(),
       new LinearGradientPackage(),
       new NavigationPackage(reactNativeHost),
+      new ReactNativePushNotificationPackage(),
       new ReanimatedPackage(),
       new HighlighterViewPackage(),
       new WheelPickerPackage(),

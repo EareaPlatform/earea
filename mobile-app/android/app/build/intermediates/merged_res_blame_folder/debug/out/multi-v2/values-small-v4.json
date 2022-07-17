@@ -4,7 +4,7 @@
             "outputFile": "/Users/amitshw/github/earea/mobile-app/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-small-v4/values-small-v4.xml",
             "map": [
                 {
-                    "source": "/Users/amitshw/.gradle/caches/transforms-3/63bf9034bc6a5463c31b259056ba5ccd/transformed/material-1.2.0-alpha03/res/values-small-v4/values-small-v4.xml",
+                    "source": "/Users/amitshw/.gradle/caches/transforms-3/692eae48d34749ce84d5037461c2df70/transformed/material-1.2.0-alpha03/res/values-small-v4/values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

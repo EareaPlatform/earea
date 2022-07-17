@@ -4,6 +4,8 @@
   "scripts": {
     "deploy": "sls deploy"
   },
-  "dependencies": {},
+  "dependencies": {
+    "firebase-admin": "^9.6.0"
+  },
   "devDependencies": {}
 }
