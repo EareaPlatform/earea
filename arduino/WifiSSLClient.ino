@@ -4,14 +4,18 @@
 
 char ssid[] = SECRET_SSID;        // your network SSID (name)
 char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
-int keyIndex = 0;            // your network key index number (needed only for WEP)
+
 const int SENSOR_IN = 2;
+
 const int SAMPLE_TIME = 10;
 const int SAMPLE_PERIOD = 3000;
-const int SOUND_SIZE = 50;
+
 const int MINIMUM_BUFFER_VALUE = 1;
 const int MINIMUM_VALUE_NEEDED = 10;
+
 const int SOUND_INDICATION = 1;
+
+const int SOUND_SIZE = 50;
 const int SIZE_OF_INT = 4;
 
 unsigned long millisCurrent;
@@ -23,9 +27,11 @@ unsigned long secondsLast = 0;
 unsigned long secondsElapsed = 0;
 
 int sampleBufferValue = 0;
+
 int sound[SOUND_SIZE];
-char httpBodyString[SIZE_OF_INT*SOUND_SIZE];
 int soundSize = 0;
+
+char httpBodyString[SIZE_OF_INT*SOUND_SIZE];
 
 int sendRequest = 1;
 int disconnectFromServer = 1;
@@ -115,7 +121,7 @@ void loop() {
             Serial.println(soundSize);
 
             int bodyLen = generateBodyStr(httpBodyString, sound);
-    
+
              Serial.println("HTTP Request:");
             // Make a HTTP request:
             client.println("POST /earea-serverless-dev-processSound HTTP/1.1");
@@ -127,16 +133,16 @@ void loop() {
             client.println();
             client.println(httpBodyString);
         }
-        
+
         for(int j = 0; j < soundSize; j++){
            Serial.println(sound[j]);
            sound[j] = 0;
         }
-  
+
         secondsLast = secondsCurrent;
         soundSize = 0;
     }
-      
+
     while (client.available()) {
       char c = client.read();
       Serial.write(c);
@@ -169,18 +175,18 @@ void printWiFiStatus() {
 
 int generateBodyStr(char* httpBody, int* values) {
   char buffer[4];
-  
+
   if (soundSize == 0){
     return 0;
   }
 
-  int bodyLen = sprintf(httpBody, "%s,", itoa(values[0], buffer, 10));  
+  int bodyLen = sprintf(httpBody, "%s,", itoa(values[0], buffer, 10));
   for (int i = 1; i < soundSize - 1; i++) {  // append the remaining field names and values to the string
     // each pair is separated by an ampersand (&)
     bodyLen += sprintf(&httpBody[bodyLen], "%s,",itoa(values[i], buffer, 10));
   }
   bodyLen += sprintf(&httpBody[bodyLen], "%s",itoa(values[soundSize], buffer, 10));
 
-  
+
   return bodyLen;
 }
