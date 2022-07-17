@@ -9,7 +9,8 @@ const int SENSOR_IN = 2;
 const int SAMPLE_TIME = 10;
 const int SAMPLE_PERIOD = 3000;
 const int SOUND_SIZE = 50;
-const int MINIMUM_BUFFER_VALUE = 30;
+const int MINIMUM_BUFFER_VALUE = 1;
+const int MINIMUM_VALUE_NEEDED = 10;
 const int SOUND_INDICATION = 1;
 const int SIZE_OF_INT = 4;
 
@@ -19,7 +20,7 @@ unsigned long millisElapsed = 0;
 
 unsigned long secondsCurrent;
 unsigned long secondsLast = 0;
-unsigned long secondsEllapsed = 0;
+unsigned long secondsElapsed = 0;
 
 int sampleBufferValue = 0;
 int sound[SOUND_SIZE];
@@ -44,11 +45,11 @@ WiFiSSLClient client;
 void setup() {
   //Initialize serial and wait for port to open:
   Serial.begin(9600);
-  
+
   for(int i = 0; i < SOUND_SIZE; i++){
     sound[i] = 0;
   }
-  
+
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
@@ -88,26 +89,28 @@ void setup() {
 void loop() {
     millisCurrent = millis();
     millisElapsed = millisCurrent - millisLast;
-  
+
     secondsCurrent = millis();
-    secondsEllapsed = secondsCurrent - secondsLast;
-    
+    secondsElapsed = secondsCurrent - secondsLast;
+
     if (digitalRead(SENSOR_IN) == SOUND_INDICATION) {
       sampleBufferValue++;
     }
-    
-    if (millisElapsed > SAMPLE_TIME) {    
+
+    if (millisElapsed > SAMPLE_TIME) {
       if(sampleBufferValue > MINIMUM_BUFFER_VALUE){
         Serial.println(sampleBufferValue);
-        sound[soundSize++] = sampleBufferValue;
+        if(sampleBufferValue > MINIMUM_VALUE_NEEDED){
+          sound[soundSize++] = sampleBufferValue;
+         }
         }
-        
+
       sampleBufferValue = 0;
       millisLast = millisCurrent;
     }
-  
-    if(secondsEllapsed > SAMPLE_PERIOD){
-        if(soundSize > 15){
+
+    if(secondsElapsed > SAMPLE_PERIOD){
+        if(soundSize > 7){
             Serial.println("size: ");
             Serial.println(soundSize);
 
