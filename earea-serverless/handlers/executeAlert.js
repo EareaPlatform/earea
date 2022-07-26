@@ -12,13 +12,13 @@ exports.handler = async (event) => {
   const allowedToAlert = true;
   let res = {};
 
+  const snsRawMessage = JSON.parse(event?.Records?.[0]?.Sns?.Message ?? {});
+
   if (allowedToAlert) {
-    // Do whatever you want to do with firebase storage
-    // firebaseStorage = admin.storage();
     const message = {
       notification: {
-        title: 'test from aws1',
-        body: 'some body',
+        title: snsRawMessage?.title ?? 'Hey you!',
+        body: snsRawMessage?.body ?? 'Some sensors found something',
       },
       data: {
         someKey: 'someValue'
@@ -31,19 +31,13 @@ exports.handler = async (event) => {
     } catch (err) {
       console.error(err);
     }
-
-    // Do whatever you want to do with firestore
-    // firebaseFirestore = admin.firestore();
-
-    // Do whatever you want to do with auth
-    // firebaseFirestore = admin.auth();
   }
 
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: JSON.parse(res),
+        ...res,
         input: event,
       },
       null,

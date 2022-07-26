@@ -12,7 +12,7 @@ functions:
     events:
       - httpApi:
           path: /process/sound
-          method: get
+          method: post
 
   saveAlert:
     handler: handlers/saveAlert.handler
