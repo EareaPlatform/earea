@@ -6,6 +6,19 @@ provider:
   runtime: nodejs14.x
   region: eu-central-1
 
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: arn:aws:dynamodb:eu-central-1:249409715289:table/sensors-alerts
+
 functions:
   processSound:
     handler: handlers/processSound.handler
@@ -44,3 +57,20 @@ functions:
       - httpApi:
           path: /getSensors
           method: get
+resources:
+  Resources:
+    serviceTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: sensors-alerts
+        AttributeDefinitions:
+          - AttributeName: sensor-name
+            AttributeType: S
+          - AttributeName: alert-date
+            AttributeType: S
+        KeySchema:
+          - AttributeName: sensor-name
+            KeyType: HASH
+          - AttributeName: alert-date
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST

@@ -4,7 +4,7 @@ exports.handler = async (event) => {
     // call AI to decide if to alert
     let shouldAlert = false;
 
-    if(event.isBase64Encoded != undefined && event.isBase64Encoded){
+    if(event.isBase64Encoded !== undefined && event.isBase64Encoded){
         const decodedEventBody = Buffer.from(event.body, 'base64').toString('ascii');
         console.log('event body decoded:', decodedEventBody);
 
@@ -37,7 +37,7 @@ exports.handler = async (event) => {
                 message = `Alert executed. ID: ${err.data.MessageId}`;
             }
         }
-    };
+    }
 
     return {
         statusCode: 200,
