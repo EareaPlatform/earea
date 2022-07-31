@@ -17,7 +17,7 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: arn:aws:dynamodb:eu-central-1:249409715289:table/sensors-alerts
+          Resource: arn:aws:dynamodb:eu-central-1:249409715289:table/alertsDB
 
 functions:
   processSound:
@@ -62,15 +62,15 @@ resources:
     serviceTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: sensors-alerts
+        TableName: alertsDB
         AttributeDefinitions:
-          - AttributeName: sensor-name
+          - AttributeName: timeStamp
             AttributeType: S
-          - AttributeName: alert-date
+          - AttributeName: sensorName
             AttributeType: S
         KeySchema:
-          - AttributeName: sensor-name
+          - AttributeName: timeStamp
             KeyType: HASH
-          - AttributeName: alert-date
+          - AttributeName: sensorName
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST

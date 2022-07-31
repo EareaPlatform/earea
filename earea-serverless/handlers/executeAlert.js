@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 const serviceAccount = require('../eareaFirebaseServiceAccount.json');
-const registrationToken = "eRjV2FPwSU2-gdfG2j8gR5:APA91bFTyR4xTy3jV2EQLFl_v7agW50Ui32wL6x7U1at46jWFh1sRESJn1C6IZhaXehJvu9SZAD9E_j6OAfMpge7QG1cGQgcqHzw4bBe59a1Vm9ckUuixCwv8tAoSEWCaXRaobndyiX_";
+const registrationToken = "fMKdUg3yRlqtiO5HhaG_xD:APA91bFgAe8rM6zKy3yPqmS6k5iJXKuAftj5kLXHJldCqdG0nqM3I1a29D9fIj08TY2J4En3SWoZd-i0bbQsFZGOSnLUZHydrmVg-xJxLFJLsTlnE10V1n3fSpnwaoB7bTAwgxPa2WUm";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

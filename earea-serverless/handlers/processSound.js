@@ -16,8 +16,35 @@ exports.handler = async (event) => {
     }
 
     if (shouldAlert) {
-        // call lambda: Save data
-        // call lambda: Execute al
+        const lambda = new AWS.Lambda({
+            region: 'eu-central-1'
+        });
+        const date = new Date();
+        const eventData = {
+            timeStamp: Date.now().toString(),
+            sensorName: 'sound-1',
+            alertDate: date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear(),
+            time: date.getHours() + ':' + date.getMinutes(),
+            precisionRate: '87'
+        };
+
+        try{
+            await lambda.invoke({
+                FunctionName: 'arn:aws:lambda:eu-central-1:249409715289:function:earea-serverless-dev-saveAlert',
+                InvocationType: 'RequestResponse',
+                Payload: JSON.stringify(eventData, null, 2),
+            }).promise();
+        }catch (err){
+            if(err) {
+                console.error('error invoking saveAlert');
+               console.log('error', err);
+            } else {
+                console.info('alertSaved');
+                message = `Alert saved`;
+            }
+        }
+
+        // call lambda: Execute ML
         const sns = new AWS.SNS();
 
         try{
