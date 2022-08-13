@@ -23,7 +23,7 @@ DerivedData
 
 # Android/IntelliJ
 #
-mobile-app/android/build/
+mobile-app/android/build/.
 .idea
 .gradle
 local.properties
@@ -58,4 +58,4 @@ buck-out/
 
 # CocoaPods
 mobile-app/ios/Pods/
-mobile-app/android/app/build/outputs/apk/.
+mobile-app/android/app/build/.
