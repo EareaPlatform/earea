@@ -17,7 +17,7 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: arn:aws:dynamodb:eu-central-1:249409715289:table/alertsDB
+          Resource: arn:aws:dynamodb:eu-central-1:249409715289:table/*
 
 functions:
   processSound:
@@ -74,3 +74,14 @@ resources:
           - AttributeName: sensorName
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
+    SoundData:
+        Type: AWS::DynamoDB::Table
+        Properties:
+          TableName: soundData
+          AttributeDefinitions:
+            - AttributeName: values
+              AttributeType: S
+          KeySchema:
+            - AttributeName: values
+              KeyType: HASH
+          BillingMode: PAY_PER_REQUEST

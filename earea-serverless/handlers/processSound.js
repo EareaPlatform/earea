@@ -1,21 +1,38 @@
 const AWS = require('aws-sdk');
+const dynamoDB = new AWS.DynamoDB.DocumentClient({
+    region: 'eu-central-1'
+})
 
 exports.handler = async (event) => {
     // call AI to decide if to alert
+    const soundSampleSize = 400;
     let shouldAlert = false;
+    let soundValues;
 
-        if(event.isBase64Encoded !== undefined && event.isBase64Encoded){
+    if(event.isBase64Encoded !== undefined && event.isBase64Encoded){
         const decodedEventBody = Buffer.from(event.body, 'base64').toString('ascii');
+        soundValues = decodedEventBody;
         console.log('event body decoded:', decodedEventBody);
+        console.log('event body type:', typeof decodedEventBody);
 
         const soundValuesArray = decodedEventBody.split(',').map((number) => {
             return parseInt(number, 10);
         });
 
-        shouldAlert = soundValuesArray.filter((number) => { return number >= 15}).length >= 3;//.reduce((previousSum, currentValue) => previousSum + currentValue, 0) > 20;
+        shouldAlert = soundValuesArray.filter((number) => { return number >= 20}).length >= 3 && soundValuesArray.length === soundSampleSize;
     }
 
     if (shouldAlert) {
+        const soundData = {
+            values: soundValues,
+        };
+
+        const params = {
+            TableName: 'soundData',
+            Item: soundData
+        };
+        await dynamoDB.put(params).promise();
+
         const lambda = new AWS.Lambda({
             region: 'eu-central-1'
         });

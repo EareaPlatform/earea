@@ -8,14 +8,16 @@ char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as k
 const int SENSOR_IN = 2;
 
 const int SAMPLE_TIME = 10;
-const int SAMPLE_PERIOD = 3000;
+const int SAMPLE_PERIOD = 5000;
+const int LAST_VALUES_SIZE = 5;
 
 const int MINIMUM_BUFFER_VALUE = 1;
-const int MINIMUM_VALUE_NEEDED = 10;
+const int MINIMUM_VALUE_NEEDED = 65;
 
 const int SOUND_INDICATION = 1;
 
-const int SOUND_SIZE = 50;
+const int SOUND_SIZE = 400;
+const int SOUND_SAMPLE_SIZE = 100;
 const int SIZE_OF_INT = 4;
 
 unsigned long millisCurrent;
@@ -29,7 +31,11 @@ unsigned long secondsElapsed = 0;
 int sampleBufferValue = 0;
 
 int sound[SOUND_SIZE];
+int soundSample[SOUND_SAMPLE_SIZE];
+int lastValues[LAST_VALUES_SIZE];
 int soundSize = 0;
+int soundSampleSize = 0;
+int amountOfHighValues = 0;
 
 char httpBodyString[SIZE_OF_INT*SOUND_SIZE];
 
@@ -56,6 +62,14 @@ void setup() {
     sound[i] = 0;
   }
 
+  for(int j = 0; j < LAST_VALUES_SIZE; j++){
+    lastValues[j] = 0;
+  }
+
+  for(int k = 0; k < SOUND_SAMPLE_SIZE; k++){
+    sound[k] = 0;
+  }
+
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
@@ -78,11 +92,14 @@ void setup() {
   while (status != WL_CONNECTED) {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
+    Serial.println("delaying1");
+    delay(5000);
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(ssid, pass);
 
     // wait 10 seconds for connection:
-    delay(10000);
+    Serial.println("delaying2");
+    delay(3000);
   }
   Serial.println("Connected to WiFi");
   printWiFiStatus();
@@ -90,6 +107,8 @@ void setup() {
   Serial.println("\nStarting connection to server...");
   // if you get a connection, report back via serial:
   result = client.connect(server, 443);
+  Serial.println("result: ");
+  Serial.println(result);
 }
 
 void loop() {
@@ -105,20 +124,31 @@ void loop() {
 
     if (millisElapsed > SAMPLE_TIME) {
       if(sampleBufferValue > MINIMUM_BUFFER_VALUE){
-        Serial.println(sampleBufferValue);
-        if(sampleBufferValue > MINIMUM_VALUE_NEEDED){
-          sound[soundSize++] = sampleBufferValue;
-         }
+        int lastValuesSum = 0;
+        //Serial.println(sampleBufferValue);
+        lastValues[soundSize % LAST_VALUES_SIZE] = sampleBufferValue;
+        soundSample[soundSampleSize++] = sampleBufferValue;
+        for(int j = 0; j < LAST_VALUES_SIZE; j++){
+          lastValuesSum += lastValues[j];
         }
+        Serial.println(lastValuesSum);
+        if(lastValuesSum > MINIMUM_VALUE_NEEDED){
+          Serial.println("###########################################");
+          amountOfHighValues++;
+          Serial.println(amountOfHighValues);
+          Serial.println("###########################################");
+        }
+     }
 
       sampleBufferValue = 0;
       millisLast = millisCurrent;
     }
 
-    if(secondsElapsed > SAMPLE_PERIOD){
-        if(soundSize > 7){
-            Serial.println("size: ");
-            Serial.println(soundSize);
+    if(soundSize >= SOUND_SIZE){
+        if(amountOfHighValues >= 3){
+            for(int i = 0; i < SOUND_SAMPLE_SIZE; i++){
+              sound[soundSize++] = soundSample[i];
+            }
 
             int bodyLen = generateBodyStr(httpBodyString, sound);
 
@@ -134,13 +164,16 @@ void loop() {
             client.println(httpBodyString);
         }
 
-        for(int j = 0; j < soundSize; j++){
-           Serial.println(sound[j]);
-           sound[j] = 0;
+        for(int j = 0; j < SOUND_SAMPLE_SIZE; j++){
+           soundSample[j] = 0;
         }
 
         secondsLast = secondsCurrent;
-        soundSize = 0;
+        soundSampleSize = 0;
+        amountOfHighValues = 0;
+        if(soundSize == SOUND_SIZE){
+          soundSize = 0;
+        }
     }
 
     while (client.available()) {
