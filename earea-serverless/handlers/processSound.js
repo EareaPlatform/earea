@@ -19,7 +19,7 @@ exports.handler = async (event) => {
             return parseInt(number, 10);
         });
 
-        shouldAlert = soundValuesArray.filter((number) => { return number >= 20}).length >= 3 && soundValuesArray.length === soundSampleSize;
+        shouldAlert = soundValuesArray.filter((number) => { return number >= 20}).length >= 3;
     }
 
     if (shouldAlert) {
