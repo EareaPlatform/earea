@@ -25,11 +25,27 @@ const AWS = require("aws-sdk");
 const dynamoDB = new AWS.DynamoDB.DocumentClient({
     region: 'eu-central-1'
 })
+const alertsTableName = 'alertsDB';
 
 exports.handler = async (event) => {
     //const { amountToFetch, pageNumber } = JSON.parse(event.body);
+
+    const lastActivity = getLastActivity();
+    const sensorsData = buildSensorsData(lastActivity);
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(
+            sensorsData,
+            null,
+            2
+        ),
+    };
+};
+
+const getLastActivity = async () => {
     const params = {
-        TableName: 'alertsDB',
+        TableName: alertsTableName,
     };
 
     let lastActivity;
@@ -43,6 +59,10 @@ exports.handler = async (event) => {
         lastActivity = alertTime;
     });
 
+    return lastActivity;
+}
+
+const buildSensorsData = async (lastActivity) => {
     const sensorsDataArray = [
         {
             id: 'sound-1',
@@ -58,12 +78,5 @@ exports.handler = async (event) => {
         currentPage: 1,
     };
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(
-            sensorsData,
-            null,
-            2
-        ),
-    };
-};
+    return sensorsData;
+}

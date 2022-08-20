@@ -15,22 +15,7 @@ exports.handler = async (event) => {
   const snsRawMessage = JSON.parse(event?.Records?.[0]?.Sns?.Message ?? {});
 
   if (allowedToAlert) {
-    const message = {
-      notification: {
-        title: snsRawMessage?.title ?? 'Hey you!',
-        body: snsRawMessage?.body ?? 'Some sensors found something',
-      },
-      data: {
-        someKey: 'someValue'
-      },
-      tokens: [registrationToken],
-    };
-
-    try {
-      res = await admin.messaging().sendMulticast(message);
-    } catch (err) {
-      console.error(err);
-    }
+    res = alertUser(snsRawMessage);
   }
 
   return {
@@ -45,3 +30,27 @@ exports.handler = async (event) => {
     ),
   };
 };
+
+const alertUser = async (snsRawMessage) => {
+  let res = {};
+
+
+  const message = {
+    notification: {
+      title: snsRawMessage?.title ?? 'Hey you!',
+      body: snsRawMessage?.body ?? 'Some sensors found something',
+    },
+    data: {
+      someKey: 'someValue'
+    },
+    tokens: [registrationToken],
+  };
+
+  try {
+    res = await admin.messaging().sendMulticast(message);
+  } catch (err) {
+    console.error(err);
+  }
+
+  return res;
+}

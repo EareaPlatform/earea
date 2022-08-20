@@ -5,18 +5,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 
 exports.handler = async (event) => {
 
-    const eventData = {
-        timeStamp: event.timeStamp,
-        sensorName: event.sensorName,
-        alertDate: event.alertDate,
-        time: event.time,
-        precisionRate: event.precisionRate
-    };
-
-    const params = {
-        TableName: 'alertsDB',
-        Item: eventData
-    };
+    const params = buildSaveAlertParams();
 
     await dynamoDB.put(params).promise();
 
@@ -32,3 +21,20 @@ exports.handler = async (event) => {
     ),
   };
 };
+
+const buildSaveAlertParams = () => {
+    const eventData = {
+        timeStamp: event.timeStamp,
+        sensorName: event.sensorName,
+        alertDate: event.alertDate,
+        time: event.time,
+        precisionRate: event.precisionRate
+    };
+
+    const params = {
+        TableName: 'alertsDB',
+        Item: eventData
+    };
+
+    return params;
+}
