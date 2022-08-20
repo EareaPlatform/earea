@@ -1,7 +1,7 @@
 exports.handler = async (event) => {
 
     const NotificationEnableData = {
-        isNotificationEnabled: false,
+        isNotificationEnabled: true,
     };
 
     return {

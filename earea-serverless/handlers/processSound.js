@@ -73,7 +73,7 @@ const getIsNotificationsEnabled = async () => {
         }).promise();
 
          console.log({getIsNotificationsEnabledLambdaResponse});
-        isNotificationsEnabledResponse.isNotificationsEnabled = getIsNotificationsEnabledLambdaResponse.body;
+        isNotificationsEnabledResponse.isNotificationsEnabled = getIsNotificationsEnabledLambdaResponse.Payload.body;
     }catch (err){
         if(err) {
             console.error('error invoking getIsNotificationsEnabled');
