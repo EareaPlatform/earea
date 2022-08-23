@@ -1,4 +1,4 @@
-const mockNotifications = (amountToMock = 10, sensors) => {
+/*const mockNotifications = (amountToMock = 10, sensors) => {
     const randomDate = () => {
         const start = new Date(2020, 1, 1);
         const end = new Date();
@@ -19,23 +19,37 @@ const mockNotifications = (amountToMock = 10, sensors) => {
     }
 
     return result;
-};
+};*/
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient({
     region: 'eu-central-1'
 });
+const alertsTableName = 'alertsDB';
 
 exports.handler = async (event) => {
     //const { amountToFetch, pageNumber } = JSON.parse(event.body);
-    const randomDate = () => {
-        const start = new Date(2020, 1, 1);
-        const end = new Date();
 
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    const notificationsData = buildNotificationsData();
+
+    const lastNotificationsData = {
+        notificationsData,
+        amountOfPages: 1,
+        currentPage: 1,
     };
 
+    return {
+        statusCode: 200,
+        body: JSON.stringify(
+            lastNotificationsData,
+            null,
+            2
+        ),
+    };
+};
+
+const buildNotificationsData = async () => {
     const params = {
-      TableName: 'alertsDB',
+        TableName: alertsTableName,
     };
 
     const notificationsData = [];
@@ -53,20 +67,5 @@ exports.handler = async (event) => {
         })
     });
 
-    console.log({dynamoDbData});
-
-    const lastNotificationsData = {
-        notificationsData,
-        amountOfPages: 1,
-        currentPage: 1,
-    };
-
-    return {
-        statusCode: 200,
-        body: JSON.stringify(
-            lastNotificationsData,
-            null,
-            2
-        ),
-    };
-};
+    return notificationsData;
+}
