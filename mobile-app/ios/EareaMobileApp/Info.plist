@@ -50,6 +50,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<key>NSBluetoothAlwaysUsageDescription</key>
 <true/>
 </dict>
 </plist>
