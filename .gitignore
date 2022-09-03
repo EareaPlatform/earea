@@ -23,7 +23,7 @@ DerivedData
 
 # Android/IntelliJ
 #
-mobile-app/android/build/.
+mobile-app/android/app/build/
 .idea
 .gradle
 local.properties
@@ -58,4 +58,10 @@ buck-out/
 
 # CocoaPods
 mobile-app/ios/Pods/
-mobile-app/android/app/build/.
+
+# package directories
+earea-serverless/node_modules
+earea-serverless/jspm_packages
+
+# Serverless directories
+earea-serverless/.serverless
