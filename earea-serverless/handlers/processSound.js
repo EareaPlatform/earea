@@ -59,9 +59,7 @@ const executeAlert = async () => {
 }
 
 const getIsNotificationsEnabled = async () => {
-    const isNotificationsEnabledResponse = {
-        isNotificationsEnabled: false,
-    }
+    let isNotificationsEnabled = false;
 
     try{
          const  getSettingsLambdaResponse = await lambda.invoke({
@@ -69,20 +67,22 @@ const getIsNotificationsEnabled = async () => {
             InvocationType: 'RequestResponse',
         }).promise();
 
-         const settingsObject = JSON.parse(getSettingsLambdaResponse.toString());
-        console.log({settingsObject});
-         isNotificationsEnabledResponse.isNotificationsEnabled = settingsObject.Payload.body.isNotificationEnabled;
-        console.log({isNotificationsEnabledResponse});
+         //const getSettingsLambdaResponseParsed =  JSON.parse(JSON.parse(getSettingsLambdaResponse.Payload).body);
+        const settingsObject= JSON.parse(JSON.parse(getSettingsLambdaResponse.Payload).body);
+        //console.log({settingsObject});
+        //const settings = JSON.parse(settingsObject.settings)
+        console.log(settingsObject.settings.isNotificationEnabled);
+         isNotificationsEnabled = settingsObject.settings.isNotificationEnabled;
     }catch (err){
         if(err) {
-            console.error('error invoking getIsNotificationsEnabled');
+            console.error('error invoking getSettings');
             console.log('error', err);
         } else {
-            console.info('getIsNotificationsEnabled');
+            console.info('getSettings');
         }
     }
 
-    return isNotificationsEnabledResponse.isNotificationsEnabled;
+    return isNotificationsEnabled;
 }
 
 const getEventBodyDecoded = (event) => {

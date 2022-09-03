@@ -24,6 +24,8 @@ const buildSaveSettingsParams = (event) => {
     const settings = {
         userDisplayName: event.userDisplayName,
         isNotificationEnabled: event.isNotificationEnabled,
+        phoneNotificationToken: event.phoneNotificationToken,
+        bluetoothMACId: event.bluetoothMACId,
     };
 
     const params = {

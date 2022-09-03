@@ -11,12 +11,17 @@ exports.handler = async (event) => {
         TableName: settingsTableName,
     };
 
+    const settings = {}
     const settingsData = await dynamoDB.scan(params).promise();
+
+    settingsData.Items.forEach((item) => {
+        settings[item.fieldName] = item.fieldValue
+    });
 
     return {
         statusCode: 200,
         body: JSON.stringify(
-            settingsData,
+            {settings},
             null,
             2
         ),
