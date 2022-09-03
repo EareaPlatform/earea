@@ -28,18 +28,14 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 const alertsTableName = 'alertsDB';
 
 exports.handler = async (event) => {
-    //const { amountToFetch, pageNumber } = JSON.parse(event.body);
-
-    const lastActivity = getLastActivity();
+    const lastActivity = await getLastActivity();
     const sensorsData = buildSensorsData(lastActivity);
+
+    console.log({sensorsData});
 
     return {
         statusCode: 200,
-        body: JSON.stringify(
-            sensorsData,
-            null,
-            2
-        ),
+        body: JSON.stringify(sensorsData),
     };
 };
 
@@ -49,16 +45,25 @@ const getLastActivity = async () => {
     };
 
     let lastActivity;
+    let maxTimeStamp = 0;
+
     const dynamoDbData = await dynamoDB.scan(params).promise();
     dynamoDbData.Items.forEach((item) => {
-        const [month, day, year] = item.alertDate.split('.');
-        const [hours, minutes] = item.time.split(':');
+        const timeStamp = item.timeStamp;
+        console.log('timeStamp: ', timeStamp, 'maxTimeStamp: ', maxTimeStamp)
+        if(timeStamp >= maxTimeStamp){
+            const [month, day, year] = item.alertDate.split('.');
+            const [hours, minutes] = item.time.split(':');
 
-        const alertTime = new Date(+year, +month - 1, +day, +hours, +minutes, +'00');
+            const alertTime = new Date(year, month - 1, day, hours, minutes, +'00');
 
-        lastActivity = alertTime;
+            lastActivity = alertTime;
+            maxTimeStamp = timeStamp;
+        }
     });
 
+    console.log('lastActivity', lastActivity);
+    console.log('maxTimeStamp', new Date(maxTimeStamp));
     return lastActivity;
 }
 
@@ -73,7 +78,15 @@ const buildSensorsData = async (lastActivity) => {
         }
     ]
     const sensorsData = {
-        sensorsData: sensorsDataArray,
+        sensorsData: [
+            {
+                id: 'sound-1',
+                type: 'sound-sensor',
+                title: 'Sound 1',
+                isOnline: true,
+                lastActivity
+            }
+        ],
         amountOfPages: 1,
         currentPage: 1,
     };

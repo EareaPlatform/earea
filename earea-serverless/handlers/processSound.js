@@ -6,12 +6,9 @@ const lambda = new AWS.Lambda({
     region: 'eu-central-1'
 });
 const soundDataTableName = 'soundData';
-const soundSampleSize = 400;
 const sensorName = 'sound-1';
 
 exports.handler = async (event) => {
-    // call AI to decide if to alert
-
     const {shouldAlert, soundValues} = getEventBodyDecoded(event);
 
     const isNotificationsEnabled = getIsNotificationsEnabled();
@@ -22,7 +19,7 @@ exports.handler = async (event) => {
         const alertData = buildAlertData();
         await saveAlertToDb(alertData);
 
-        // call lambda: Execute ML
+        //Check with ML model
         await executeAlert();
     }
 
@@ -67,13 +64,15 @@ const getIsNotificationsEnabled = async () => {
     }
 
     try{
-         const  getIsNotificationsEnabledLambdaResponse = await lambda.invoke({
-            FunctionName: 'arn:aws:lambda:eu-central-1:249409715289:function:earea-serverless-dev-getIsNotificationsEnabled',
+         const  getSettingsLambdaResponse = await lambda.invoke({
+            FunctionName: 'arn:aws:lambda:eu-central-1:249409715289:function:earea-serverless-dev-getSettings',
             InvocationType: 'RequestResponse',
         }).promise();
 
-         console.log({getIsNotificationsEnabledLambdaResponse});
-        isNotificationsEnabledResponse.isNotificationsEnabled = getIsNotificationsEnabledLambdaResponse.Payload.body;
+         const settingsObject = JSON.parse(getSettingsLambdaResponse.toString());
+        console.log({settingsObject});
+         isNotificationsEnabledResponse.isNotificationsEnabled = settingsObject.Payload.body.isNotificationEnabled;
+        console.log({isNotificationsEnabledResponse});
     }catch (err){
         if(err) {
             console.error('error invoking getIsNotificationsEnabled');
@@ -134,7 +133,6 @@ const buildAlertData = () => {
 }
 
 const saveAlertToDb = async (alertData) => {
-
     try{
         await lambda.invoke({
             FunctionName: 'arn:aws:lambda:eu-central-1:249409715289:function:earea-serverless-dev-saveAlert',

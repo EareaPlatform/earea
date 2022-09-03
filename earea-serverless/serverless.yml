@@ -44,12 +44,19 @@ functions:
           path: /getNotifications
           method: get
 
-  getIsNotificationsEnabled:
-    handler: handlers/getIsNotificationsEnabled.handler
+  getSettings:
+    handler: handlers/getSettings.handler
     events:
       - httpApi:
-          path: /NotificationStatus
+          path: /getSettings
           method: get
+
+  setSettings:
+    handler: handlers/setSettings.handler
+    events:
+      - httpApi:
+          path: /setSettings
+          method: post
 
   getSensorsList:
     handler: handlers/getSensorsList.handler
@@ -85,3 +92,18 @@ resources:
             - AttributeName: values
               KeyType: HASH
           BillingMode: PAY_PER_REQUEST
+    SettingsData:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: settings
+        AttributeDefinitions:
+          - AttributeName: fieldName
+            AttributeType: S
+          - AttributeName: fieldValue
+            AttributeType: S
+        KeySchema:
+          - AttributeName: fieldName
+            KeyType: HASH
+          - AttributeName: fieldValue
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
