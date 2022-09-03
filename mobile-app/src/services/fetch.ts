@@ -1,17 +1,16 @@
 import log from './log';
 
 const _fetch = async (url: string, options?: Partial<RequestInit>) => {
-  let result;
+  log.complex('fetchService', `fetching from ${url}`);
+  const response = await fetch(url, options);
 
-  try {
-    log.complex('fetchService', `fetching ${url}`);
-    const response = await fetch(url, options);
-
-    result = await response.json();
-    // log.complex('fetchService', 'fetched:\n', JSON.stringify(result, null, 2));
-  } catch (err) {
-    log.warn('fetchService', `failed to fetch ${url}.\n Error: ${err}`);
+  if (response.status !== 200 || !response.ok) {
+    const text = await response.text();
+    throw new Error(text);
   }
+
+  const result = await response.json();
+  // log.complex('fetchService', 'fetched:\n', JSON.stringify(result, null, 2));
 
   return result;
 };
