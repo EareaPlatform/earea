@@ -23,7 +23,7 @@ BLEService ledService("19B10000-E8F2-537E-4F6C-D104768A1214"); // create service
 // create switch characteristic and allow remote device to read and write
 BLEByteCharacteristic switchCharacteristic("19B10001-E8F2-537E-4F6C-D104768A1214", BLERead | BLEWrite);
 
-const int ledPin = 2; // pin to use for the LED
+const int ledPin = 3; // pin to use for the LED
 
 void setup() {
   Serial.begin(9600);
@@ -88,6 +88,9 @@ void switchCharacteristicWritten(BLEDevice central, BLECharacteristic characteri
   if (switchCharacteristic.value()) {
     Serial.println("VIBRATION on");
     digitalWrite(ledPin, HIGH);
+    delay(3000);
+    digitalWrite(ledPin, LOW);
+    Serial.println("VIBRATION off");
   } else {
     Serial.println("VIBRATION off");
     digitalWrite(ledPin, LOW);
