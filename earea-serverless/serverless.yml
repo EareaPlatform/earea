@@ -95,15 +95,11 @@ resources:
     SettingsData:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: settings
+        TableName: settingsDB
         AttributeDefinitions:
           - AttributeName: fieldName
-            AttributeType: S
-          - AttributeName: fieldValue
             AttributeType: S
         KeySchema:
           - AttributeName: fieldName
             KeyType: HASH
-          - AttributeName: fieldValue
-            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST

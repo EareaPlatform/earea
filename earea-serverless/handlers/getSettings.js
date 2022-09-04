@@ -3,7 +3,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
     region: 'eu-central-1'
 });
 
-const settingsTableName = 'settings';
+const settingsTableName = 'settingsDB';
 
 exports.handler = async (event) => {
 
