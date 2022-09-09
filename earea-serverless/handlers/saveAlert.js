@@ -37,4 +37,4 @@ const buildSaveAlertParams = (event) => {
     };
 
     return params;
-}
+};

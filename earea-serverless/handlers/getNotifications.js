@@ -29,18 +29,19 @@ const alertsTableName = 'alertsDB';
 exports.handler = async (event) => {
     //const { amountToFetch, pageNumber } = JSON.parse(event.body);
 
-    const notificationsData = buildNotificationsData();
+    const notificationsData = await buildNotificationsData();
+    console.log({notificationsData});
 
     const lastNotificationsData = {
         notificationsData,
-        amountOfPages: 1,
+        amountOfPages: Math.ceil(notificationsData.length/20),
         currentPage: 1,
     };
 
     return {
         statusCode: 200,
         body: JSON.stringify(
-            lastNotificationsData,
+            {lastNotificationsData},
             null,
             2
         ),
