@@ -8,8 +8,6 @@ exports.handler = async (event) => {
     const lastActivity = await getLastActivity();
     const sensorsData = buildSensorsData(lastActivity);
 
-    console.log({sensorsData});
-
     return {
         statusCode: 200,
         body: JSON.stringify(sensorsData),
@@ -38,8 +36,6 @@ const getLastActivity = async () => {
         }
     });
 
-    console.log('lastActivity', lastActivity);
-    console.log('maxTimeStamp', new Date(maxTimeStamp));
     return lastActivity;
 }
 
@@ -54,15 +50,7 @@ const buildSensorsData = (lastActivity) => {
         }
     ]
     const sensorsData = {
-        sensorsData: [
-            {
-                id: 'sound-1',
-                type: 'sound-sensor',
-                title: 'Sound 1',
-                isOnline: true,
-                lastActivity
-            }
-        ],
+        sensorsData: sensorsDataArray,
         amountOfPages: 1,
         currentPage: 1,
     };
