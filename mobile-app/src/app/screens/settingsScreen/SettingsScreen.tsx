@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, Checkbox, Button, Assets} from 'react-native-ui-lib';
+import {View, Text, Checkbox, Button, Assets, TextField, Typography} from 'react-native-ui-lib';
 import {strings} from '../../../constants/strings';
 import Section from '../../common/Section';
 import ScreenWrapper from '../../common/ScreenWrapper';
 import {ImageURISource} from 'react-native';
+import {useSettingsStore} from '../../state/settings/useSettingsStore';
 
 export interface NotificationField {
   id: string;
@@ -50,9 +51,52 @@ const sensorsFields: SensorActionField[] = [
 ];
 
 const SettingsScreen = () => {
+  const {
+    // isNotificationsEnabled,
+    userDisplayName,
+    bluetoothMACId,
+    phoneNotificationToken,
+    // updateSettings,
+  } = useSettingsStore();
+
   return (
     <ScreenWrapper>
       <Text screenTitle red30 marginB-20>{strings.SETTINGS_SCREEN_TITLE}</Text>
+
+      <Text text30M marginV-20>User Settings</Text>
+
+      <TextField
+        marginV-20
+        migrate
+        label={'Display name'}
+        labelProps={{
+          style: Typography.text60BL,
+        }}
+        value={userDisplayName}
+      />
+
+      <Text text30M marginV-20>General Settings</Text>
+
+      <TextField
+        marginV-20
+        migrate
+        label={'Bluetooth MAC id'}
+        labelProps={{
+          style: Typography.text60BL,
+        }}
+        value={bluetoothMACId}
+      />
+
+      <TextField
+        marginV-20
+        migrate
+        label={'Phone notification token'}
+        labelProps={{
+          style: Typography.text60BL,
+        }}
+        value={phoneNotificationToken}
+      />
+
       <Section headerTitle={strings.SETTINGS_SCREEN_NOTIFICATIONS_TITLE} expandable>
         {
           notificationsFields.map((item: NotificationField) => (

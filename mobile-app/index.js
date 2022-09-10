@@ -10,6 +10,7 @@ import {isDevMode} from './src/constants/environment';
 import {screenIds} from './src/constants/screenIds';
 import {loadSkin} from './src/loadSkin';
 import * as bleService from './src/services/bluetooth';
+import * as settingsActions from './src/app/state/settings/actions';
 
 LogBox.ignoreAllLogs(true);
 
@@ -21,6 +22,9 @@ log.complex('Environment', process.env.NODE_ENV);
 PushNotification.configure({
   onRegister: (token) => {
     log.complex('NOTIFICATION', `Registration token: ${JSON.stringify(token, null, 2)}`);
+    settingsActions.updateSettings({
+      phoneNotificationToken: token.token,
+    });
   },
   onNotification: (notification) => {
     log.complex('NOTIFICATION', notification);
