@@ -1,14 +1,15 @@
 import 'react-native-gesture-handler';
 import PushNotification from 'react-native-push-notification';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {LogBox} from 'react-native';
-import {LayoutTabsChildren} from 'react-native-navigation';
 import {navigationService} from './src/services/navigation';
 import log from './src/services/log';
 import {registerScreens} from './src/registerScreens';
-import {tabsInfo, Tab} from './src/constants/tabs';
+import {tabsInfo} from './src/constants/tabs';
 import {isDevMode} from './src/constants/environment';
 import {screenIds} from './src/constants/screenIds';
 import {loadSkin} from './src/loadSkin';
+import * as bleService from './src/services/bluetooth';
 
 LogBox.ignoreAllLogs(true);
 
@@ -18,18 +19,17 @@ registerScreens();
 log.complex('Environment', process.env.NODE_ENV);
 
 PushNotification.configure({
-  onRegister: (token: any) => {
-    console.log('Registration token:', {token});
+  onRegister: (token) => {
+    log.complex('NOTIFICATION', `Registration token: ${JSON.stringify(token, null, 2)}`);
   },
-  onNotification: (notification: any) => {
-    console.log('NOTIFICATION:', notification);
-
-    // process the notification
+  onNotification: (notification) => {
+    log.complex('NOTIFICATION', notification);
+    bleService.notify();
 
     // (required) Called when a remote is received or opened, or local notification is opened
-    // notification.finish(PushNotificationIOS.FetchResult.NoData);
+    notification.finish(PushNotificationIOS.FetchResult.NoData);
   },
-  onRegistrationError: (err: any) => {
+  onRegistrationError: (err) => {
     console.error('Notification failed', err.message, err);
   },
   popInitialNotification: true,
@@ -37,7 +37,7 @@ PushNotification.configure({
 });
 
 navigationService.registerTabs(
-  tabsInfo.reduce((previousTabs: LayoutTabsChildren[], currentTab: Tab) => {
+  tabsInfo.reduce((previousTabs, currentTab) => {
     if (!isDevMode && currentTab.screenId === screenIds.demoScreen) {
       return previousTabs;
     } else {
