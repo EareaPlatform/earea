@@ -6,6 +6,7 @@ import Section from '../../common/Section';
 import {notificationsStore} from '../../state/notifications/store';
 import {sensorsStore} from '../../state/sensors/store';
 import log from '../../../services/log';
+import * as bleService from '../../../services/bluetooth';
 
 interface Action {
   label: string;
@@ -29,6 +30,12 @@ const actions: Action[] = [
 
       sensorsStore.setters.isInit(!currentStatus);
       log.debug('demo', 'sensors isInit is', sensorsStore.getters.isInit());
+    },
+  },
+  {
+    label: 'Notify Bluetooth',
+    onPress: async () => {
+      await bleService.notify();
     },
   },
 ];
