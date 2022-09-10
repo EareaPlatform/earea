@@ -27,11 +27,14 @@ PushNotification.configure({
     });
   },
   onNotification: (notification) => {
-    log.complex('NOTIFICATION', notification);
+    log.complex('NOTIFICATION onNotification', notification);
     bleService.notify();
-
     // (required) Called when a remote is received or opened, or local notification is opened
     notification.finish(PushNotificationIOS.FetchResult.NoData);
+  },
+  onAction: (notification) => {
+    log.complex('NOTIFICATION onAction', notification);
+    bleService.notify();
   },
   onRegistrationError: (err) => {
     console.error('Notification failed', err.message, err);
