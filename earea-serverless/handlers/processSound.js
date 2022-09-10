@@ -11,7 +11,7 @@ const sensorName = 'sound-1';
 exports.handler = async (event) => {
     const {shouldAlert, soundValues} = getEventBodyDecoded(event);
 
-    const isNotificationsEnabled = getIsNotificationsEnabled();
+    const isNotificationsEnabled = await getIsNotificationsEnabled();
 
     if (shouldAlert && isNotificationsEnabled) {
         await saveSoundDataToDb(soundValues);
@@ -67,12 +67,8 @@ const getIsNotificationsEnabled = async () => {
             InvocationType: 'RequestResponse',
         }).promise();
 
-         //const getSettingsLambdaResponseParsed =  JSON.parse(JSON.parse(getSettingsLambdaResponse.Payload).body);
         const settingsObject= JSON.parse(JSON.parse(getSettingsLambdaResponse.Payload).body);
-        //console.log({settingsObject});
-        //const settings = JSON.parse(settingsObject.settings)
-        console.log(settingsObject.settings.isNotificationEnabled);
-         isNotificationsEnabled = settingsObject.settings.isNotificationEnabled;
+        isNotificationsEnabled = settingsObject.settings.isNotificationsEnabled === 'true';
     }catch (err){
         if(err) {
             console.error('error invoking getSettings');
