@@ -7,20 +7,24 @@ const lambda = new AWS.Lambda({
 });
 const soundDataTableName = 'soundData';
 const sensorName = 'sound-1';
+const soundThreshold = 75;
+const soundSampleSize = 5;
 
 exports.handler = async (event) => {
     const {shouldAlert, soundValues} = getEventBodyDecoded(event);
 
     const isNotificationsEnabled = await getIsNotificationsEnabled();
 
-    if (shouldAlert && isNotificationsEnabled) {
+    if (shouldAlert) {
         await saveSoundDataToDb(soundValues);
 
-        const alertData = buildAlertData();
-        await saveAlertToDb(alertData);
+        if(isNotificationsEnabled){
+            const alertData = buildAlertData();
+            await saveAlertToDb(alertData);
 
-        //Check with ML model
-        await executeAlert();
+            //Check with ML model
+            await executeAlert();
+        }
     }
 
     return {
@@ -28,7 +32,6 @@ exports.handler = async (event) => {
         body: JSON.stringify(
             {
                 message: shouldAlert ? 'Execute alert' : 'Nothing happened',
-                input: event,
             },
             null,
             2
@@ -62,7 +65,7 @@ const getIsNotificationsEnabled = async () => {
     let isNotificationsEnabled = false;
 
     try{
-         const  getSettingsLambdaResponse = await lambda.invoke({
+        const  getSettingsLambdaResponse = await lambda.invoke({
             FunctionName: 'arn:aws:lambda:eu-central-1:249409715289:function:earea-serverless-dev-getSettings',
             InvocationType: 'RequestResponse',
         }).promise();
@@ -93,7 +96,7 @@ const getEventBodyDecoded = (event) => {
             return parseInt(number, 10);
         });
 
-        shouldAlert = soundValuesArray.filter((number) => { return number >= 20}).length >= 3;
+        shouldAlert = isSoundDataOverThreshold(soundValuesArray);
     }
 
     return({
@@ -144,4 +147,20 @@ const saveAlertToDb = async (alertData) => {
             message = `Alert saved`;
         }
     }
+}
+
+const isSoundDataOverThreshold = (soundValuesArray) => {
+    let soundSamplesAboveThreshold = 0;
+    for(let i = 0; i < soundValuesArray.length - soundSampleSize; i++){
+        let soundSample = 0;
+        for(let j = 0; j < soundSampleSize; j++){
+            soundSample += soundValuesArray[i + j];
+        }
+
+        if(soundSample >= soundThreshold){
+            soundSamplesAboveThreshold++;
+        }
+    }
+
+    return  soundSamplesAboveThreshold >= 3;
 }
