@@ -6,23 +6,20 @@ const settingsTableName = 'settingsDB';
 
 exports.handler = async (event) => {
 
-    //const params = buildSaveSettingsParams(event);
+    const settingsObjectsArray = JSON.parse(event.body).data;
 
-    //await dynamoDB.put(params).promise();
-
-    const settingsObjectsArray = event.body.split('}');
-    for (const obj of settingsObjectsArray) {
-        const index = settingsObjectsArray.indexOf(obj);
-        if(index !== settingsObjectsArray.length - 1){
-            const parsedObject = JSON.parse(obj.slice(1) + '}');
+    for (const setting of settingsObjectsArray) {
+        console.log({setting});
+        if(setting.fieldValue !== 'undefined'){
             const params = {
                 TableName: settingsTableName,
-                Key: {fieldName : parsedObject.fieldName},
+                Key: {fieldName : setting.fieldName},
                 UpdateExpression: 'set fieldValue = :v',
                 ExpressionAttributeValues: {
-                    ':v': parsedObject.fieldValue
+                    ':v': setting.fieldValue
                 },
             };
+
             await dynamoDB.update(params).promise();
         }
     }
@@ -36,16 +33,3 @@ exports.handler = async (event) => {
         ),
     };
 };
-
-const buildSaveSettingsParams = (event) => {
-    const settings = {
-        userDisplayName: event.userDisplayName,
-        isNotificationEnabled: event.isNotificationEnabled,
-        phoneNotificationToken: event.phoneNotificationToken,
-        bluetoothMACId: event.bluetoothMACId,
-    };
-
-
-
-    return params;
-}
