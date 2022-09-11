@@ -12,6 +12,7 @@ export const loadSkin = () => {
 
   ThemeManager.setComponentTheme('Button', {
     linkColor: Colors.blue30,
+    outlineColor: Colors.blue30,
     backgroundColor: Colors.blue30,
   });
 

@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {settingsStore} from './store';
 import {serverAPI, SetSettingsRequest} from './serverAPI';
 import log from '../../../services/log';
 
 const initialize = (settings: UserSettings) => {
   settingsStore.setters.userDisplayName(settings.userDisplayName);
-  settingsStore.setters.isNotificationsEnabled(settings.isNotificationsEnabled);
+  // @ts-ignore
+  settingsStore.setters.isNotificationsEnabled(settings.isNotificationsEnabled === 'true');
   settingsStore.setters.phoneNotificationToken(settings.phoneNotificationToken);
   settingsStore.setters.bluetoothMACId(settings.bluetoothMACId);
 
@@ -39,4 +41,8 @@ export const updateSettings = async (settings: Partial<UserSettings>) => {
   });
 
   await serverAPI.setSettings(data);
+};
+
+export const updateCurrentPhoneNoticiationToken = (val: string) => {
+  settingsStore.setters.currentPhoneNoticiationToken(val);
 };

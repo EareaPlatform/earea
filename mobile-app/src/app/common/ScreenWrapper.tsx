@@ -1,11 +1,12 @@
 import React, {PropsWithChildren} from 'react';
 import {ScrollView} from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import {Constants, View} from 'react-native-ui-lib';
+import {Constants, Toast, ToastProps, View} from 'react-native-ui-lib';
 
 export interface ScreenWrapperProps {
   scrollable?: boolean;
   withTopBar?: boolean;
+  toastProps?: ToastProps;
 }
 
 const ScreenWrapper = (props: PropsWithChildren<ScreenWrapperProps>) => {
@@ -14,6 +15,7 @@ const ScreenWrapper = (props: PropsWithChildren<ScreenWrapperProps>) => {
 
   return (
     <View flex useSafeArea bg-white {...containerExtraProps}>
+      <Toast {...(props.toastProps ?? {})} />
       <ScrollView scrollEnabled={props.scrollable}>
         <GestureHandlerRootView>
           <View flex paddingH-20 {...innerExtraProps}>

@@ -12,6 +12,7 @@
     "start-android-release": "react-native run-android --variant=release"
   },
   "dependencies": {
+    "@react-native-clipboard/clipboard": "^1.11.0",
     "@react-native-community/push-notification-ios": "^1.10.1",
     "@react-native-picker/picker": "^2.4.0",
     "@react-native/normalize-color": "^2.0.0",

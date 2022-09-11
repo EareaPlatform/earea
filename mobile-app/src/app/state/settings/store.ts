@@ -6,6 +6,7 @@ export interface ISettingsStore {
   userDisplayName: string;
   bluetoothMACId: string;
   phoneNotificationToken: string;
+  currentPhoneNoticiationToken: string;
 }
 
 const initialState: ISettingsStore = {
@@ -14,6 +15,7 @@ const initialState: ISettingsStore = {
   userDisplayName: '',
   bluetoothMACId: '',
   phoneNotificationToken: '',
+  currentPhoneNoticiationToken: '',
 };
 
 const state: ISettingsStore = remx.state(initialState);
@@ -34,6 +36,9 @@ const getters = remx.getters({
   phoneNotificationToken(): string {
     return state.phoneNotificationToken;
   },
+  currentPhoneNoticiationToken(): string {
+    return state.currentPhoneNoticiationToken;
+  },
 });
 
 const setters = remx.setters({
@@ -51,6 +56,9 @@ const setters = remx.setters({
   },
   phoneNotificationToken(phoneNotificationToken: string): void {
     state.phoneNotificationToken = phoneNotificationToken;
+  },
+  currentPhoneNoticiationToken(currentPhoneNoticiationToken: string): void {
+    state.currentPhoneNoticiationToken = currentPhoneNoticiationToken;
   },
 });
 

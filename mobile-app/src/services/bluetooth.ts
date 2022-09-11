@@ -1,15 +1,23 @@
 import {BleError, BleManager, Device, Service} from 'react-native-ble-plx';
-import {bluetoothDeviceAddress} from '../constants/bluetooth';
+// import {bluetoothDeviceAddress} from '../constants/bluetooth';
 import log from './log';
 import * as base64 from 'base-64';
+import {settingsStore} from '../app/state/settings/store';
+import * as settingsActions from '../app/state/settings/actions';
 
 const bluetooth = new BleManager();
+
+const _getBluetoothDeviceAddress = async () => {
+  await settingsActions.initIfNeeded();
+  return settingsStore.getters.bluetoothMACId();
+};
 
 export const isEnabled = () => {
   return bluetooth.state();
 };
 
 export const scan = async () => {
+  const bluetoothDeviceAddress = await _getBluetoothDeviceAddress();
   bluetooth.startDeviceScan(null, null, (_error: BleError | null, _scannedDevice: Device | null) => {
     if (_error) {
       console.warn(JSON.stringify(_error, null, 2));
@@ -22,6 +30,8 @@ export const scan = async () => {
 };
 
 export const connect = async (): Promise<Device> => {
+  const bluetoothDeviceAddress = await _getBluetoothDeviceAddress();
+
   log.complex('BLUETOOTH', `creating connection with ${bluetoothDeviceAddress}...`);
 
   const device = await bluetooth.connectToDevice(bluetoothDeviceAddress);
@@ -37,6 +47,8 @@ export const connect = async (): Promise<Device> => {
 };
 
 export const disconnect = async (device: Device) => {
+  const bluetoothDeviceAddress = await _getBluetoothDeviceAddress();
+
   if (await device.isConnected()) {
     log.complex('BLUETOOTH', `canceling connection with ${bluetoothDeviceAddress}...`);
     await device.cancelConnection();

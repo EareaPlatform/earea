@@ -22,9 +22,7 @@ log.complex('Environment', process.env.NODE_ENV);
 PushNotification.configure({
   onRegister: (token) => {
     log.complex('NOTIFICATION', `Registration token: ${JSON.stringify(token, null, 2)}`);
-    settingsActions.updateSettings({
-      phoneNotificationToken: token.token,
-    });
+    settingsActions.updateCurrentPhoneNoticiationToken(token.token);
   },
   onNotification: (notification) => {
     log.complex('NOTIFICATION onNotification', notification);
