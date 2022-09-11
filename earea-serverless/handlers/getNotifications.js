@@ -27,10 +27,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 const alertsTableName = 'alertsDB';
 
 exports.handler = async (event) => {
-    //const { amountToFetch, pageNumber } = JSON.parse(event.body);
-
     const notificationsData = await buildNotificationsData();
-    console.log({notificationsData});
 
     const lastNotificationsData = {
         notificationsData,
@@ -40,11 +37,7 @@ exports.handler = async (event) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(
-            {lastNotificationsData},
-            null,
-            2
-        ),
+        body: JSON.stringify(lastNotificationsData),
     };
 };
 
@@ -66,6 +59,8 @@ const buildNotificationsData = async () => {
             sensorOriginId: item.sensorName,
             time: alertTime,
         })
+
+        notificationsData.sort((itemA, itemB) => { return parseInt(itemB.id) - parseInt(itemA.id)});
     });
 
     return notificationsData;
