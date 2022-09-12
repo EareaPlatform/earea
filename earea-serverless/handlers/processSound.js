@@ -124,7 +124,7 @@ const buildAlertData = () => {
         timeStamp: Date.now().toString(),
         sensorName,
         alertDate: date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear(),
-        time: date.getHours() + ':' + date.getMinutes(),
+        time: (date.getHours() + 1)+ ':' + date.getMinutes(),
         precisionRate: '87'
     };
 
