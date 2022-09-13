@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Button, Colors, Text, TextField, Typography, View} from 'react-native-ui-lib';
 import {useSettingsStore} from '../../state/settings/useSettingsStore';
+import * as bleService from '../../../services/bluetooth';
 
 export interface GeneralSettingsProps {
   toggleToast: (message: string) => void;
@@ -27,6 +28,10 @@ export const GeneralSettings = (props: GeneralSettingsProps) => {
     _toggleToast('General settings as been saved');
   }, [_bluetoothMACId, _toggleToast, updateSettings]);
 
+  const testBluetooth = useCallback(async () => {
+    await bleService.notify();
+  }, []);
+
   return (
     <>
       <View row spread centerV marginT-60 marginB-10>
@@ -35,7 +40,6 @@ export const GeneralSettings = (props: GeneralSettingsProps) => {
           label={'Save'}
           labelStyle={Typography.text70}
           style={styles.button}
-          outline
           onPress={saveGeneralSettings}
         />
       </View>
@@ -47,6 +51,14 @@ export const GeneralSettings = (props: GeneralSettingsProps) => {
         value={_bluetoothMACId}
         onChangeText={_setBluetoothMACId}
       />
+      <View flex right centerV>
+        <Button
+          label={'Test bluetooth'}
+          onPress={testBluetooth}
+          outlineColor={Colors.$textNeutral}
+          backgroundColor={Colors.$textNeutral}
+        />
+      </View>
     </>
   );
 };

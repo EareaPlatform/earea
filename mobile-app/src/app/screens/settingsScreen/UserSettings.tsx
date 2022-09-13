@@ -24,7 +24,6 @@ export const UserSettings = (props: UserSettingsProps) => {
           label={'Save'}
           labelStyle={Typography.text70}
           style={styles.button}
-          outline
           onPress={saveUserSettings}
         />
       </View>
