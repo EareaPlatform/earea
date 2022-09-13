@@ -16,3 +16,10 @@ interface NotificationData {
   sensorOriginId: string;
   time: Date;
 }
+
+interface UserSettings {
+  isNotificationsEnabled: boolean;
+  userDisplayName: string;
+  bluetoothMACId: string;
+  phoneNotificationToken: string;
+}

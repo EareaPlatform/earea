@@ -20,7 +20,7 @@ export interface UseHomeScreen {
   sensorsViewAllCta?: ButtonProps;
 }
 
-export const AMOUNT_TO_SHOW = 3;
+export const AMOUNT_TO_SHOW = 5;
 
 export const useHomeScreen = (props: UseHomeScreenProps): UseHomeScreen => {
   const {sensors, loaded: showSensors} = useSensors();

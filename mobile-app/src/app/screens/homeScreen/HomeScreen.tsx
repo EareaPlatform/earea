@@ -17,7 +17,6 @@ const HomeScreen = (props: HomeScreenProps) => {
     showNotifications,
     showSensors,
     notificationViewAllCta,
-    sensorsViewAllCta,
   } = useHomeScreen({componentId: props.componentId});
 
   const renderItem = useCallback((item: ListItemProps) => (
@@ -39,7 +38,6 @@ const HomeScreen = (props: HomeScreenProps) => {
       <Section
         headerTitle={strings.HOME_SCREEN_SENSORS_TITLE}
         loading={!showSensors}
-        rightButton={sensorsViewAllCta}
       >
         {sensorsToShow.map(renderItem)}
       </Section>
